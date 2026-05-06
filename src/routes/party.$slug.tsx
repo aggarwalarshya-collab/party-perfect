@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { parties } from "@/data/parties";
+import { parties, type Party } from "@/data/parties";
 import { PartyCard } from "@/components/PartyCard";
 
 export const Route = createFileRoute("/party/$slug")({
@@ -73,7 +73,7 @@ function PartyDetail() {
           <h2 className="font-display text-3xl font-semibold md:text-4xl">The vendor stack</h2>
           <p className="mt-2 text-muted-foreground">Curated, verified, available. Tap to view profile.</p>
           <ul className="mt-8 divide-y divide-border rounded-3xl border border-border bg-card">
-            {party.vendors.map((v) => (
+            {party.vendors.map((v: Party["vendors"][number]) => (
               <li key={v.name} className="flex items-center justify-between gap-4 px-6 py-5">
                 <div>
                   <div className="font-display text-xl font-semibold">{v.name}</div>
