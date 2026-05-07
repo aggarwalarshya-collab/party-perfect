@@ -4,7 +4,7 @@ import { kits } from "@/data/parties";
 export const Route = createFileRoute("/kits")({
   head: () => ({
     meta: [
-      { title: "Designer Party Kits — House of Affairs" },
+      { title: "Party Kits — House of Affairs" },
       { name: "description", content: "Printable invites, menus, games & signage. Designer kits at ₹499." },
     ],
   }),
@@ -16,7 +16,7 @@ function KitsPage() {
     <div>
       <section className="border-b border-border bg-oxblood-deep text-background">
         <div className="mx-auto max-w-7xl px-5 py-14 md:px-8 md:py-20">
-          <div className="text-xs uppercase tracking-[0.25em] text-gold">Designer Party Kits</div>
+          <div className="text-xs uppercase tracking-[0.25em] text-gold">Party Kits</div>
           <h1 className="mt-2 font-display text-5xl font-semibold leading-[1] tracking-tight md:text-7xl">
             Finish the affair in <span className="italic text-gold">five clicks.</span>
           </h1>
@@ -28,32 +28,41 @@ function KitsPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-20">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
           {kits.map((k) => (
-            <article key={k.slug} className="group overflow-hidden rounded-2xl border-2 border-foreground bg-card transition hover:-translate-y-1 hover:shadow-lux">
-              {/* preview tiles */}
-              <div className="grid grid-cols-2 gap-1 p-3" style={{ backgroundColor: `color-mix(in oklab, ${k.color} 25%, transparent)` }}>
-                {k.preview.map((label, idx) => (
-                  <div key={label} className="relative aspect-square overflow-hidden rounded-lg bg-background ring-1 ring-border">
-                    <div className="absolute inset-0 grain" style={{ backgroundColor: `color-mix(in oklab, ${k.color} ${30 + idx * 10}%, var(--background))` }} />
-                    <div className="absolute inset-2 rounded-md border border-foreground/20 bg-background/60 backdrop-blur-sm grid place-items-center text-center px-2">
-                      <span className="font-display text-xs font-semibold text-foreground/85">{label}</span>
-                    </div>
-                    <span className="absolute right-1 top-1 rounded-full bg-foreground px-1.5 py-0.5 text-[8px] uppercase tracking-wider text-background">
-                      Preview
-                    </span>
-                  </div>
-                ))}
+            <article key={k.slug} className="group overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition hover:-translate-y-1 hover:shadow-lux">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <img
+                  src={k.image}
+                  alt={`${k.name} preview`}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
+                <span className="absolute left-3 top-3 rounded-full bg-card/95 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-foreground backdrop-blur">
+                  ✦ Sneak peek
+                </span>
+                <span className="absolute right-3 top-3 rounded-full bg-oxblood px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-background">
+                  ₹{k.price}
+                </span>
               </div>
               <div className="p-6">
                 <h3 className="font-display text-2xl font-semibold leading-tight">{k.name}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{k.items}</p>
+
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {k.preview.map((label) => (
+                    <span key={label} className="rounded-full bg-blush-soft px-2.5 py-1 text-[11px] text-foreground/80">
+                      {label}
+                    </span>
+                  ))}
+                </div>
+
                 <div className="mt-6 flex items-end justify-between">
                   <div>
                     <div className="text-xs uppercase tracking-wider text-muted-foreground">One-time</div>
                     <div className="font-display text-3xl font-semibold">₹{k.price}</div>
                   </div>
-                  <button className="rounded-full bg-foreground px-5 py-2.5 text-sm font-medium text-background transition group-hover:bg-oxblood">
+                  <button className="rounded-full bg-oxblood px-5 py-2.5 text-sm font-medium text-background transition hover:opacity-90">
                     Add to cart
                   </button>
                 </div>
