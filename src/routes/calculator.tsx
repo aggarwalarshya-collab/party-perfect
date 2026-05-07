@@ -55,16 +55,30 @@ function CalcPage() {
     };
   }, [occasion, city, vibe, guests]);
 
-  const options = useMemo(() => {
+  const { options, isFallback } = useMemo(() => {
     const occ = occasionMap[occasion];
     const cityName = city === "Other Tier-1" ? null : city;
-    return parties.filter(
+    const strict = parties.filter(
       (p) =>
         (occ ? p.occasion === occ : true) &&
         (cityName ? p.city === cityName : true) &&
         p.budget >= low * 0.7 &&
         p.budget <= high * 1.3,
     );
+    if (strict.length > 0) return { options: strict, isFallback: false };
+    // Fallback: closest-by-budget across all parties
+    const ranked = [...parties]
+      .map((p) => {
+        const mid = (low + high) / 2;
+        const dist = Math.abs(p.budget - mid);
+        const occMatch = occ && p.occasion === occ ? -50000 : 0;
+        const cityMatch = cityName && p.city === cityName ? -25000 : 0;
+        return { p, score: dist + occMatch + cityMatch };
+      })
+      .sort((a, b) => a.score - b.score)
+      .map((x) => x.p)
+      .slice(0, 4);
+    return { options: ranked, isFallback: true };
   }, [occasion, city, low, high]);
 
   const fmt = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
