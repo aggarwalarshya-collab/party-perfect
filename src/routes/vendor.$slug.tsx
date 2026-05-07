@@ -60,7 +60,7 @@ function VendorDetail() {
 
           <h3 className="mt-10 font-display text-2xl font-semibold">Signature packages</h3>
           <ul className="mt-4 space-y-3">
-            {vendor.packages.map((p) => (
+            {vendor.packages.map((p: typeof vendor.packages[number]) => (
               <li key={p.name} className="flex items-start justify-between gap-4 rounded-2xl border border-border bg-card p-5">
                 <div>
                   <div className="font-display text-lg font-semibold">{p.name}</div>
