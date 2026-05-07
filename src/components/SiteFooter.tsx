@@ -20,7 +20,7 @@ export function SiteFooter() {
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gold/70">For hosts</div>
           <ul className="mt-4 space-y-2 text-sm text-background/85">
             <li><Link to="/" className="hover:text-gold">The Feed</Link></li>
-            <li><Link to="/discover" className="hover:text-gold">Discover</Link></li>
+            <li><Link to="/search" className="hover:text-gold">Search</Link></li>
             <li><Link to="/exclusive" className="hover:text-gold">Exclusive collections</Link></li>
             <li><Link to="/kits" className="hover:text-gold">Party kits</Link></li>
             <li><Link to="/calculator" className="hover:text-gold">Budget calculator</Link></li>
@@ -29,10 +29,10 @@ export function SiteFooter() {
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gold/70">For vendors</div>
           <ul className="mt-4 space-y-2 text-sm text-background/85">
-            <li><span>List your business</span></li>
-            <li><span>Enquiry pack</span></li>
-            <li><span>Visibility pack</span></li>
-            <li><span>Growth pack</span></li>
+            <li><Link to="/vendors" className="hover:text-gold">List your business</Link></li>
+            <li><Link to="/vendors/dashboard" className="hover:text-gold">Enquiry pack</Link></li>
+            <li><Link to="/vendors/dashboard" className="hover:text-gold">Visibility pack</Link></li>
+            <li><Link to="/vendors/dashboard" className="hover:text-gold">Growth pack</Link></li>
           </ul>
         </div>
       </div>

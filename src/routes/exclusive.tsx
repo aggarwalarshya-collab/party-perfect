@@ -59,7 +59,7 @@ function ExclusivePage() {
                       <Row label="Mood board" value="42 references · downloadable" />
                       <Row label="Vendor stack" value="6 vetted vendors · contacts unlocked" />
                       <Row label="Exact recipe" value="Decor list · F&B menu · playlist" />
-                      <Link to="/discover" className="mt-3 inline-block rounded-full bg-oxblood px-4 py-2 text-xs font-medium text-background">
+                      <Link to="/search" className="mt-3 inline-block rounded-full bg-oxblood px-4 py-2 text-xs font-medium text-background">
                         Open full edit →
                       </Link>
                     </div>

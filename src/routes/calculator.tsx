@@ -55,16 +55,30 @@ function CalcPage() {
     };
   }, [occasion, city, vibe, guests]);
 
-  const options = useMemo(() => {
+  const { options, isFallback } = useMemo(() => {
     const occ = occasionMap[occasion];
     const cityName = city === "Other Tier-1" ? null : city;
-    return parties.filter(
+    const strict = parties.filter(
       (p) =>
         (occ ? p.occasion === occ : true) &&
         (cityName ? p.city === cityName : true) &&
         p.budget >= low * 0.7 &&
         p.budget <= high * 1.3,
     );
+    if (strict.length > 0) return { options: strict, isFallback: false };
+    // Fallback: closest-by-budget across all parties
+    const ranked = [...parties]
+      .map((p) => {
+        const mid = (low + high) / 2;
+        const dist = Math.abs(p.budget - mid);
+        const occMatch = occ && p.occasion === occ ? -50000 : 0;
+        const cityMatch = cityName && p.city === cityName ? -25000 : 0;
+        return { p, score: dist + occMatch + cityMatch };
+      })
+      .sort((a, b) => a.score - b.score)
+      .map((x) => x.p)
+      .slice(0, 4);
+    return { options: ranked, isFallback: true };
   }, [occasion, city, low, high]);
 
   const fmt = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
@@ -125,17 +139,16 @@ function CalcPage() {
           {showOptions && (
             <div className="mt-10">
               <h2 className="font-display text-3xl font-semibold">
-                {options.length} curated {options.length === 1 ? "affair" : "affairs"} for your brief
+                {isFallback ? "Closest curated picks for your brief" : `${options.length} curated ${options.length === 1 ? "affair" : "affairs"} for your brief`}
               </h2>
-              {options.length === 0 ? (
-                <div className="mt-6 rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-                  Nothing in this exact slot. <Link to="/discover" className="text-oxblood hover:underline">Browse all affairs →</Link>
-                </div>
-              ) : (
-                <div className="mt-6 grid gap-6 sm:grid-cols-2">
-                  {options.map((p) => <PartyCard key={p.slug} party={p} />)}
-                </div>
+              {isFallback && (
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Nothing exact in this slot — here are the nearest matches by budget. <Link to="/search" className="text-oxblood hover:underline">Browse all →</Link>
+                </p>
               )}
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                {options.map((p) => <PartyCard key={p.slug} party={p} />)}
+              </div>
             </div>
           )}
         </div>
@@ -157,7 +170,7 @@ function CalcPage() {
               ))}
             </div>
             <div className="bg-oxblood px-7 py-5 text-sm text-background/85 ring-1 ring-gold/30">
-              Want a real shortlist for this budget? <Link to="/discover" className="font-medium text-gold">Send a brief →</Link>
+              Want a real shortlist for this budget? <Link to="/search" className="font-medium text-gold">Send a brief →</Link>
             </div>
           </div>
         </aside>
