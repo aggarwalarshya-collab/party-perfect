@@ -129,7 +129,7 @@ function CalcPage() {
               </h2>
               {options.length === 0 ? (
                 <div className="mt-6 rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-                  Nothing in this exact slot. <Link to="/discover" className="text-oxblood hover:underline">Browse all affairs →</Link>
+                  Nothing in this exact slot. <Link to="/search" className="text-oxblood hover:underline">Browse all affairs →</Link>
                 </div>
               ) : (
                 <div className="mt-6 grid gap-6 sm:grid-cols-2">
@@ -157,7 +157,7 @@ function CalcPage() {
               ))}
             </div>
             <div className="bg-oxblood px-7 py-5 text-sm text-background/85 ring-1 ring-gold/30">
-              Want a real shortlist for this budget? <Link to="/discover" className="font-medium text-gold">Send a brief →</Link>
+              Want a real shortlist for this budget? <Link to="/search" className="font-medium text-gold">Send a brief →</Link>
             </div>
           </div>
         </aside>

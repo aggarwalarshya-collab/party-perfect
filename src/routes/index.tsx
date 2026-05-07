@@ -35,7 +35,7 @@ function FeedPage() {
 
   const submit = (text?: string) => {
     const query = (text ?? q).trim();
-    navigate({ to: "/discover", search: { q: query || undefined } as never });
+    navigate({ to: "/search", search: { q: query || undefined } as never });
   };
 
   return (
