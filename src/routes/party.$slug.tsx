@@ -113,7 +113,7 @@ function PartyDetail() {
           <h2 className="font-display text-3xl font-semibold md:text-4xl">The vendor stack</h2>
           <p className="mt-2 text-muted-foreground">Curated, verified, available. Tap a name for the full profile.</p>
           <ul className="mt-8 space-y-3">
-            {party.vendors.map((v) => {
+            {party.vendors.map((v: typeof party.vendors[number]) => {
               const profile = allVendors.find((x) => x.slug === v.slug);
               return (
                 <li key={v.slug} className="rounded-2xl border border-border bg-card p-5 shadow-soft">

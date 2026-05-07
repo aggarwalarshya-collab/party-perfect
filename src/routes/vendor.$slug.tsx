@@ -26,7 +26,7 @@ export const Route = createFileRoute("/vendor/$slug")({
 
 function VendorDetail() {
   const { vendor } = Route.useLoaderData();
-  const featured = parties.filter((p) => p.vendors.some((v) => v.slug === vendor.slug));
+  const featured = parties.filter((p) => p.vendors.some((v: { slug: string }) => v.slug === vendor.slug));
 
   return (
     <div>
