@@ -139,17 +139,16 @@ function CalcPage() {
           {showOptions && (
             <div className="mt-10">
               <h2 className="font-display text-3xl font-semibold">
-                {options.length} curated {options.length === 1 ? "affair" : "affairs"} for your brief
+                {isFallback ? "Closest curated picks for your brief" : `${options.length} curated ${options.length === 1 ? "affair" : "affairs"} for your brief`}
               </h2>
-              {options.length === 0 ? (
-                <div className="mt-6 rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
-                  Nothing in this exact slot. <Link to="/search" className="text-oxblood hover:underline">Browse all affairs →</Link>
-                </div>
-              ) : (
-                <div className="mt-6 grid gap-6 sm:grid-cols-2">
-                  {options.map((p) => <PartyCard key={p.slug} party={p} />)}
-                </div>
+              {isFallback && (
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Nothing exact in this slot — here are the nearest matches by budget. <Link to="/search" className="text-oxblood hover:underline">Browse all →</Link>
+                </p>
               )}
+              <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                {options.map((p) => <PartyCard key={p.slug} party={p} />)}
+              </div>
             </div>
           )}
         </div>
