@@ -38,41 +38,45 @@
   --color-oxblood-deep: var(--oxblood-deep);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-blush: var(--blush);
+  --color-blush-soft: var(--blush-soft);
   --color-cream: var(--cream);
   --color-ink: var(--ink);
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.875rem;
 
-  /* House of Affairs — oxblood + gold designer palette */
-  --background: oklch(0.97 0.01 60);            /* warm parchment */
-  --foreground: oklch(0.18 0.04 25);            /* near-black ink */
-  --ink: oklch(0.18 0.04 25);
-  --cream: oklch(0.97 0.01 60);
+  /* House of Affairs — Champagne Ivory · Warm White · Espresso · Deep Wine · Muted Gold · Blush Rose */
+  --background: oklch(0.965 0.018 88);          /* champagne ivory */
+  --foreground: oklch(0.20 0.018 40);           /* espresso black */
+  --ink: oklch(0.20 0.018 40);
+  --cream: oklch(0.965 0.018 88);
 
-  --oxblood: oklch(0.32 0.13 20);               /* primary oxblood */
-  --oxblood-deep: oklch(0.22 0.12 22);
-  --gold: oklch(0.78 0.13 80);                  /* refined gold */
-  --gold-soft: oklch(0.88 0.07 85);
+  --oxblood: oklch(0.34 0.12 18);               /* deep wine — primary CTA */
+  --oxblood-deep: oklch(0.26 0.10 18);
+  --gold: oklch(0.74 0.085 82);                 /* muted gold accent */
+  --gold-soft: oklch(0.88 0.045 85);
+  --blush: oklch(0.86 0.045 22);                /* blush rose highlight */
+  --blush-soft: oklch(0.93 0.025 22);
 
-  --card: oklch(0.985 0.005 60);
+  --card: oklch(0.99 0.006 88);                 /* warm white */
   --card-foreground: var(--foreground);
-  --popover: oklch(0.985 0.005 60);
+  --popover: oklch(0.99 0.006 88);
   --popover-foreground: var(--foreground);
 
   --primary: var(--oxblood);
-  --primary-foreground: oklch(0.98 0.01 80);
-  --secondary: oklch(0.93 0.02 60);
+  --primary-foreground: oklch(0.985 0.012 85);
+  --secondary: oklch(0.93 0.022 85);
   --secondary-foreground: var(--foreground);
-  --muted: oklch(0.94 0.01 60);
-  --muted-foreground: oklch(0.42 0.03 25);
-  --accent: var(--gold);
+  --muted: oklch(0.94 0.015 85);
+  --muted-foreground: oklch(0.44 0.02 40);
+  --accent: var(--blush);
   --accent-foreground: var(--foreground);
-  --destructive: oklch(0.5 0.2 25);
+  --destructive: oklch(0.5 0.18 25);
   --destructive-foreground: oklch(0.98 0.01 80);
-  --border: oklch(0.86 0.02 60);
-  --input: oklch(0.86 0.02 60);
+  --border: oklch(0.88 0.018 80);
+  --input: oklch(0.88 0.018 80);
   --ring: var(--oxblood);
 
   --gradient-oxblood: linear-gradient(135deg, var(--oxblood-deep), var(--oxblood));
@@ -139,6 +143,9 @@
   .bg-oxblood { background-color: var(--oxblood); }
   .bg-oxblood-deep { background-color: var(--oxblood-deep); }
   .text-oxblood { color: var(--oxblood); }
+  .bg-blush { background-color: var(--blush); }
+  .bg-blush-soft { background-color: var(--blush-soft); }
+  .text-blush { color: var(--blush); }
 
   .ticker { animation: ticker 50s linear infinite; }
   @keyframes ticker {
