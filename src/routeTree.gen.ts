@@ -9,14 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VendorsRouteImport } from './routes/vendors'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as KitsRouteImport } from './routes/kits'
 import { Route as ExclusiveRouteImport } from './routes/exclusive'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VendorsDashboardRouteImport } from './routes/vendors.dashboard'
 import { Route as VendorSlugRouteImport } from './routes/vendor.$slug'
 import { Route as PartySlugRouteImport } from './routes/party.$slug'
 
+const VendorsRoute = VendorsRouteImport.update({
+  id: '/vendors',
+  path: '/vendors',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
@@ -42,6 +49,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendorsDashboardRoute = VendorsDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => VendorsRoute,
+} as any)
 const VendorSlugRoute = VendorSlugRouteImport.update({
   id: '/vendor/$slug',
   path: '/vendor/$slug',
@@ -59,8 +71,10 @@ export interface FileRoutesByFullPath {
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
+  '/vendors': typeof VendorsRouteWithChildren
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
+  '/vendors/dashboard': typeof VendorsDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +82,10 @@ export interface FileRoutesByTo {
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
+  '/vendors': typeof VendorsRouteWithChildren
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
+  '/vendors/dashboard': typeof VendorsDashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,8 +94,10 @@ export interface FileRoutesById {
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
+  '/vendors': typeof VendorsRouteWithChildren
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
+  '/vendors/dashboard': typeof VendorsDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,8 +107,10 @@ export interface FileRouteTypes {
     | '/exclusive'
     | '/kits'
     | '/search'
+    | '/vendors'
     | '/party/$slug'
     | '/vendor/$slug'
+    | '/vendors/dashboard'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -98,8 +118,10 @@ export interface FileRouteTypes {
     | '/exclusive'
     | '/kits'
     | '/search'
+    | '/vendors'
     | '/party/$slug'
     | '/vendor/$slug'
+    | '/vendors/dashboard'
   id:
     | '__root__'
     | '/'
@@ -107,8 +129,10 @@ export interface FileRouteTypes {
     | '/exclusive'
     | '/kits'
     | '/search'
+    | '/vendors'
     | '/party/$slug'
     | '/vendor/$slug'
+    | '/vendors/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,12 +141,20 @@ export interface RootRouteChildren {
   ExclusiveRoute: typeof ExclusiveRoute
   KitsRoute: typeof KitsRoute
   SearchRoute: typeof SearchRoute
+  VendorsRoute: typeof VendorsRouteWithChildren
   PartySlugRoute: typeof PartySlugRoute
   VendorSlugRoute: typeof VendorSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vendors': {
+      id: '/vendors'
+      path: '/vendors'
+      fullPath: '/vendors'
+      preLoaderRoute: typeof VendorsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/search': {
       id: '/search'
       path: '/search'
@@ -158,6 +190,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vendors/dashboard': {
+      id: '/vendors/dashboard'
+      path: '/dashboard'
+      fullPath: '/vendors/dashboard'
+      preLoaderRoute: typeof VendorsDashboardRouteImport
+      parentRoute: typeof VendorsRoute
+    }
     '/vendor/$slug': {
       id: '/vendor/$slug'
       path: '/vendor/$slug'
@@ -175,12 +214,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface VendorsRouteChildren {
+  VendorsDashboardRoute: typeof VendorsDashboardRoute
+}
+
+const VendorsRouteChildren: VendorsRouteChildren = {
+  VendorsDashboardRoute: VendorsDashboardRoute,
+}
+
+const VendorsRouteWithChildren =
+  VendorsRoute._addFileChildren(VendorsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorRoute: CalculatorRoute,
   ExclusiveRoute: ExclusiveRoute,
   KitsRoute: KitsRoute,
   SearchRoute: SearchRoute,
+  VendorsRoute: VendorsRouteWithChildren,
   PartySlugRoute: PartySlugRoute,
   VendorSlugRoute: VendorSlugRoute,
 }
