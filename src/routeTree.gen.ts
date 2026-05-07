@@ -10,14 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as KitsRouteImport } from './routes/kits'
+import { Route as ExclusiveRouteImport } from './routes/exclusive'
 import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VendorSlugRouteImport } from './routes/vendor.$slug'
 import { Route as PartySlugRouteImport } from './routes/party.$slug'
 
 const KitsRoute = KitsRouteImport.update({
   id: '/kits',
   path: '/kits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExclusiveRoute = ExclusiveRouteImport.update({
+  id: '/exclusive',
+  path: '/exclusive',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiscoverRoute = DiscoverRouteImport.update({
@@ -35,6 +42,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VendorSlugRoute = VendorSlugRouteImport.update({
+  id: '/vendor/$slug',
+  path: '/vendor/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartySlugRoute = PartySlugRouteImport.update({
   id: '/party/$slug',
   path: '/party/$slug',
@@ -45,38 +57,68 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/discover': typeof DiscoverRoute
+  '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/party/$slug': typeof PartySlugRoute
+  '/vendor/$slug': typeof VendorSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/discover': typeof DiscoverRoute
+  '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/party/$slug': typeof PartySlugRoute
+  '/vendor/$slug': typeof VendorSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
   '/discover': typeof DiscoverRoute
+  '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/party/$slug': typeof PartySlugRoute
+  '/vendor/$slug': typeof VendorSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/calculator' | '/discover' | '/kits' | '/party/$slug'
+  fullPaths:
+    | '/'
+    | '/calculator'
+    | '/discover'
+    | '/exclusive'
+    | '/kits'
+    | '/party/$slug'
+    | '/vendor/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/calculator' | '/discover' | '/kits' | '/party/$slug'
-  id: '__root__' | '/' | '/calculator' | '/discover' | '/kits' | '/party/$slug'
+  to:
+    | '/'
+    | '/calculator'
+    | '/discover'
+    | '/exclusive'
+    | '/kits'
+    | '/party/$slug'
+    | '/vendor/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/calculator'
+    | '/discover'
+    | '/exclusive'
+    | '/kits'
+    | '/party/$slug'
+    | '/vendor/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculatorRoute: typeof CalculatorRoute
   DiscoverRoute: typeof DiscoverRoute
+  ExclusiveRoute: typeof ExclusiveRoute
   KitsRoute: typeof KitsRoute
   PartySlugRoute: typeof PartySlugRoute
+  VendorSlugRoute: typeof VendorSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -86,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/kits'
       fullPath: '/kits'
       preLoaderRoute: typeof KitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/exclusive': {
+      id: '/exclusive'
+      path: '/exclusive'
+      fullPath: '/exclusive'
+      preLoaderRoute: typeof ExclusiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/discover': {
@@ -109,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vendor/$slug': {
+      id: '/vendor/$slug'
+      path: '/vendor/$slug'
+      fullPath: '/vendor/$slug'
+      preLoaderRoute: typeof VendorSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/party/$slug': {
       id: '/party/$slug'
       path: '/party/$slug'
@@ -123,8 +179,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorRoute: CalculatorRoute,
   DiscoverRoute: DiscoverRoute,
+  ExclusiveRoute: ExclusiveRoute,
   KitsRoute: KitsRoute,
   PartySlugRoute: PartySlugRoute,
+  VendorSlugRoute: VendorSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
