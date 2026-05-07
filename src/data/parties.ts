@@ -206,13 +206,20 @@ export const exclusives: Exclusive[] = [
   },
 ];
 
+import kitBoho from "@/assets/kit-boho.jpg";
+import kitDiwali from "@/assets/kit-diwali.jpg";
+import kitBach from "@/assets/kit-bachelorette.jpg";
+import kitKids from "@/assets/kit-kids.jpg";
+import kitAnniv from "@/assets/kit-anniversary.jpg";
+import kitDinner from "@/assets/kit-dinner.jpg";
+
 export const kits = [
-  { slug: "boho-baby-shower", name: "Boho Baby Shower Kit", price: 499, items: "Invites · Menu cards · Games · Signage", preview: ["Pampas invite", "Grazing menu", "Bingo card", "Welcome sign"], color: "var(--gold-soft)" },
-  { slug: "diwali-hosting", name: "Diwali Hosting Kit", price: 499, items: "Place cards · Menu · Tambola · Wishes board", preview: ["Marigold invite", "Mehfil menu", "Tambola sheet", "Diya tags"], color: "var(--gold)" },
-  { slug: "bachelorette-bride", name: "Bachelorette Bride Kit", price: 499, items: "Invites · Drinking games · Photo props · Sash printable", preview: ["Disco invite", "Truth-or-shot", "Photo signs", "Bride sash"], color: "var(--oxblood)" },
-  { slug: "kids-birthday", name: "Kids Birthday Kit", price: 499, items: "Invites · Thank-you cards · 5 games · Colouring sheets", preview: ["Rainbow invite", "Thank-you card", "Treasure hunt", "Colouring sheet"], color: "var(--gold-soft)" },
-  { slug: "anniversary-home", name: "Anniversary At Home Kit", price: 499, items: "Menu · Love-notes jar · Playlist · Candle map", preview: ["Date menu", "Love-notes jar", "Playlist QR", "Candle map"], color: "var(--oxblood-deep)" },
-  { slug: "dinner-party", name: "Dinner Party Kit", price: 499, items: "Place cards · Menu · Seating chart · Conversation cards", preview: ["Place cards", "Tasting menu", "Seating chart", "Convo cards"], color: "var(--gold)" },
+  { slug: "boho-baby-shower", name: "Boho Baby Shower Kit", price: 499, items: "Invites · Menu cards · Games · Signage", preview: ["Pampas invite", "Grazing menu", "Bingo card", "Welcome sign"], image: kitBoho, color: "var(--blush-soft)" },
+  { slug: "diwali-hosting", name: "Diwali Hosting Kit", price: 499, items: "Place cards · Menu · Tambola · Wishes board", preview: ["Marigold invite", "Mehfil menu", "Tambola sheet", "Diya tags"], image: kitDiwali, color: "var(--gold)" },
+  { slug: "bachelorette-bride", name: "Bachelorette Bride Kit", price: 499, items: "Invites · Drinking games · Photo props · Sash printable", preview: ["Disco invite", "Truth-or-shot", "Photo signs", "Bride sash"], image: kitBach, color: "var(--blush)" },
+  { slug: "kids-birthday", name: "Kids Birthday Kit", price: 499, items: "Invites · Thank-you cards · 5 games · Colouring sheets", preview: ["Rainbow invite", "Thank-you card", "Treasure hunt", "Colouring sheet"], image: kitKids, color: "var(--gold-soft)" },
+  { slug: "anniversary-home", name: "Anniversary At Home Kit", price: 499, items: "Menu · Love-notes jar · Playlist · Candle map", preview: ["Date menu", "Love-notes jar", "Playlist QR", "Candle map"], image: kitAnniv, color: "var(--oxblood)" },
+  { slug: "dinner-party", name: "Dinner Party Kit", price: 499, items: "Place cards · Menu · Seating chart · Conversation cards", preview: ["Place cards", "Tasting menu", "Seating chart", "Convo cards"], image: kitDinner, color: "var(--ink)" },
 ];
 
 export type Vendor = {
