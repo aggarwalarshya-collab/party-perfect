@@ -35,15 +35,6 @@ export function SiteFooter() {
             <li><Link to="/vendors/dashboard" className="hover:text-gold">Growth pack</Link></li>
           </ul>
         </div>
-        <div>
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gold/70">For vendors</div>
-          <ul className="mt-4 space-y-2 text-sm text-background/85">
-            <li><span>List your business</span></li>
-            <li><span>Enquiry pack</span></li>
-            <li><span>Visibility pack</span></li>
-            <li><span>Growth pack</span></li>
-          </ul>
-        </div>
       </div>
       <div className="border-t border-background/10 px-5 py-5 text-xs text-background/60 md:px-8">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
