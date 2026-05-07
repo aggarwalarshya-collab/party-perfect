@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as KitsRouteImport } from './routes/kits'
 import { Route as ExclusiveRouteImport } from './routes/exclusive'
-import { Route as DiscoverRouteImport } from './routes/discover'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendorSlugRouteImport } from './routes/vendor.$slug'
@@ -31,11 +30,6 @@ const KitsRoute = KitsRouteImport.update({
 const ExclusiveRoute = ExclusiveRouteImport.update({
   id: '/exclusive',
   path: '/exclusive',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DiscoverRoute = DiscoverRouteImport.update({
-  id: '/discover',
-  path: '/discover',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CalculatorRoute = CalculatorRouteImport.update({
@@ -62,7 +56,6 @@ const PartySlugRoute = PartySlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
-  '/discover': typeof DiscoverRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
@@ -72,7 +65,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
-  '/discover': typeof DiscoverRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
@@ -83,7 +75,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/calculator': typeof CalculatorRoute
-  '/discover': typeof DiscoverRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
@@ -95,7 +86,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/calculator'
-    | '/discover'
     | '/exclusive'
     | '/kits'
     | '/search'
@@ -105,7 +95,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/calculator'
-    | '/discover'
     | '/exclusive'
     | '/kits'
     | '/search'
@@ -115,7 +104,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/calculator'
-    | '/discover'
     | '/exclusive'
     | '/kits'
     | '/search'
@@ -126,7 +114,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CalculatorRoute: typeof CalculatorRoute
-  DiscoverRoute: typeof DiscoverRoute
   ExclusiveRoute: typeof ExclusiveRoute
   KitsRoute: typeof KitsRoute
   SearchRoute: typeof SearchRoute
@@ -155,13 +142,6 @@ declare module '@tanstack/react-router' {
       path: '/exclusive'
       fullPath: '/exclusive'
       preLoaderRoute: typeof ExclusiveRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/discover': {
-      id: '/discover'
-      path: '/discover'
-      fullPath: '/discover'
-      preLoaderRoute: typeof DiscoverRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/calculator': {
@@ -198,7 +178,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CalculatorRoute: CalculatorRoute,
-  DiscoverRoute: DiscoverRoute,
   ExclusiveRoute: ExclusiveRoute,
   KitsRoute: KitsRoute,
   SearchRoute: SearchRoute,
