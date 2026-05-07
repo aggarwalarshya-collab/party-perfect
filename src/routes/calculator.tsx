@@ -1,11 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import { parties } from "@/data/parties";
+import { PartyCard } from "@/components/PartyCard";
 
 export const Route = createFileRoute("/calculator")({
   head: () => ({
     meta: [
-      { title: "Party Budget Calculator — partystack" },
-      { name: "description", content: "Estimate your party cost by occasion, city, guest count and vibe." },
+      { title: "Budget Calculator — House of Affairs" },
+      { name: "description", content: "Estimate your party cost — then check curated options matching your budget." },
     ],
   }),
   component: CalcPage,
@@ -23,49 +25,68 @@ const occasionRates: Record<string, number> = {
 const cityMul: Record<string, number> = { Mumbai: 1.2, "Delhi NCR": 1.1, Bangalore: 1.0, "Other Tier-1": 0.9 };
 const vibeMul: Record<string, number> = { Minimal: 0.85, Classic: 1.0, "Glam / Editorial": 1.35 };
 
+const occasionMap: Record<string, string> = {
+  "Baby Shower": "Baby Shower",
+  Anniversary: "Anniversary",
+  "Birthday (Kids)": "Kids Birthday",
+  "Birthday (Adult)": "Anniversary",
+  Bachelorette: "Bachelorette",
+  "Festive / Diwali": "Festive",
+};
+
 function CalcPage() {
   const [occasion, setOccasion] = useState("Baby Shower");
   const [city, setCity] = useState("Mumbai");
   const [vibe, setVibe] = useState("Classic");
   const [guests, setGuests] = useState(25);
+  const [showOptions, setShowOptions] = useState(false);
 
   const { low, high, breakdown } = useMemo(() => {
     const base = (occasionRates[occasion] ?? 1500) * guests * cityMul[city] * vibeMul[vibe];
-    const decor = base * 0.4;
-    const fnb = base * 0.35;
-    const photo = base * 0.12;
-    const extras = base * 0.13;
     return {
       low: Math.round(base * 0.85),
       high: Math.round(base * 1.15),
       breakdown: [
-        ["Decor & styling", decor],
-        ["F&B / cake", fnb],
-        ["Photography", photo],
-        ["Entertainment & extras", extras],
+        ["Decor & styling", base * 0.4],
+        ["F&B / cake", base * 0.35],
+        ["Photography", base * 0.12],
+        ["Entertainment & extras", base * 0.13],
       ] as [string, number][],
     };
   }, [occasion, city, vibe, guests]);
+
+  const options = useMemo(() => {
+    const occ = occasionMap[occasion];
+    const cityName = city === "Other Tier-1" ? null : city;
+    return parties.filter(
+      (p) =>
+        (occ ? p.occasion === occ : true) &&
+        (cityName ? p.city === cityName : true) &&
+        p.budget >= low * 0.7 &&
+        p.budget <= high * 1.3,
+    );
+  }, [occasion, city, low, high]);
 
   const fmt = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
 
   return (
     <div>
-      <section className="border-b border-border bg-gradient-sunset">
+      <section className="border-b border-border bg-oxblood-deep text-background">
         <div className="mx-auto max-w-7xl px-5 py-14 md:px-8 md:py-20">
-          <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">Budget calculator</div>
+          <div className="text-xs uppercase tracking-[0.25em] text-gold">Budget calculator</div>
           <h1 className="mt-2 font-display text-5xl font-semibold leading-[1] tracking-tight md:text-7xl">
-            How much will <br /><span className="italic text-primary">this party cost?</span>
+            How much will <br /><span className="italic text-gold">this affair cost?</span>
           </h1>
-          <p className="mt-5 max-w-xl text-muted-foreground">
-            A grounded estimate based on real vendor quotes from our network. Move the sliders.
+          <p className="mt-5 max-w-xl text-background/75">
+            Grounded estimates from real vendor quotes in our network. Tweak the dials, then check
+            curated options that fit.
           </p>
         </div>
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-10 px-5 py-14 md:grid-cols-12 md:px-8">
         <div className="md:col-span-7">
-          <div className="space-y-8 rounded-3xl border border-border bg-card p-7 shadow-soft md:p-10">
+          <div className="space-y-8 rounded-2xl border border-border bg-card p-7 shadow-soft md:p-10">
             <Field label="Occasion">
               <div className="flex flex-wrap gap-2">
                 {Object.keys(occasionRates).map((o) => (
@@ -88,21 +109,40 @@ function CalcPage() {
               </div>
             </Field>
             <Field label={`Guests · ${guests}`}>
-              <input
-                type="range"
-                min={2}
-                max={150}
-                value={guests}
+              <input type="range" min={2} max={150} value={guests}
                 onChange={(e) => setGuests(Number(e.target.value))}
-                className="w-full accent-[var(--primary)]"
-              />
+                className="w-full accent-[var(--oxblood)]" />
             </Field>
           </div>
+
+          <button
+            onClick={() => setShowOptions(true)}
+            className="mt-6 w-full rounded-full bg-oxblood px-6 py-4 text-sm font-medium text-background ring-1 ring-gold/40 hover:opacity-95"
+          >
+            ✦ Check available options for this budget
+          </button>
+
+          {showOptions && (
+            <div className="mt-10">
+              <h2 className="font-display text-3xl font-semibold">
+                {options.length} curated {options.length === 1 ? "affair" : "affairs"} for your brief
+              </h2>
+              {options.length === 0 ? (
+                <div className="mt-6 rounded-2xl border border-dashed border-border p-10 text-center text-muted-foreground">
+                  Nothing in this exact slot. <Link to="/discover" className="text-oxblood hover:underline">Browse all affairs →</Link>
+                </div>
+              ) : (
+                <div className="mt-6 grid gap-6 sm:grid-cols-2">
+                  {options.map((p) => <PartyCard key={p.slug} party={p} />)}
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         <aside className="md:col-span-5">
-          <div className="sticky top-24 overflow-hidden rounded-3xl border-2 border-foreground bg-foreground text-background shadow-soft">
-            <div className="bg-[var(--confetti-peach)] px-7 py-5 text-foreground">
+          <div className="sticky top-24 overflow-hidden rounded-2xl border-2 border-foreground bg-foreground text-background shadow-lux">
+            <div className="bg-gold px-7 py-5 text-foreground">
               <div className="text-xs uppercase tracking-[0.18em]">Estimated cost</div>
               <div className="mt-1 font-display text-4xl font-semibold">
                 {fmt(low)} – {fmt(high)}
@@ -116,8 +156,8 @@ function CalcPage() {
                 </div>
               ))}
             </div>
-            <div className="bg-background/10 px-7 py-5 text-sm text-background/80">
-              Want a real shortlist for this budget? <span className="font-medium text-[var(--confetti-peach)]">Send a brief →</span>
+            <div className="bg-oxblood px-7 py-5 text-sm text-background/85 ring-1 ring-gold/30">
+              Want a real shortlist for this budget? <Link to="/discover" className="font-medium text-gold">Send a brief →</Link>
             </div>
           </div>
         </aside>
@@ -137,12 +177,10 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button
-      onClick={onClick}
+    <button onClick={onClick}
       className={`rounded-full border px-3.5 py-1.5 text-sm transition ${
         active ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/40"
-      }`}
-    >
+      }`}>
       {children}
     </button>
   );
