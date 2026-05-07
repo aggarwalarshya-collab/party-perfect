@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as KitsRouteImport } from './routes/kits'
 import { Route as ExclusiveRouteImport } from './routes/exclusive'
 import { Route as DiscoverRouteImport } from './routes/discover'
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendorSlugRouteImport } from './routes/vendor.$slug'
 import { Route as PartySlugRouteImport } from './routes/party.$slug'
 
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KitsRoute = KitsRouteImport.update({
   id: '/kits',
   path: '/kits',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/discover': typeof DiscoverRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
+  '/search': typeof SearchRoute
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/discover': typeof DiscoverRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
+  '/search': typeof SearchRoute
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/discover': typeof DiscoverRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
+  '/search': typeof SearchRoute
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/discover'
     | '/exclusive'
     | '/kits'
+    | '/search'
     | '/party/$slug'
     | '/vendor/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/discover'
     | '/exclusive'
     | '/kits'
+    | '/search'
     | '/party/$slug'
     | '/vendor/$slug'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/discover'
     | '/exclusive'
     | '/kits'
+    | '/search'
     | '/party/$slug'
     | '/vendor/$slug'
   fileRoutesById: FileRoutesById
@@ -117,12 +129,20 @@ export interface RootRouteChildren {
   DiscoverRoute: typeof DiscoverRoute
   ExclusiveRoute: typeof ExclusiveRoute
   KitsRoute: typeof KitsRoute
+  SearchRoute: typeof SearchRoute
   PartySlugRoute: typeof PartySlugRoute
   VendorSlugRoute: typeof VendorSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kits': {
       id: '/kits'
       path: '/kits'
@@ -181,9 +201,19 @@ const rootRouteChildren: RootRouteChildren = {
   DiscoverRoute: DiscoverRoute,
   ExclusiveRoute: ExclusiveRoute,
   KitsRoute: KitsRoute,
+  SearchRoute: SearchRoute,
   PartySlugRoute: PartySlugRoute,
   VendorSlugRoute: VendorSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
