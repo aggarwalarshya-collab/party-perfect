@@ -39,8 +39,8 @@ function VendorsLanding() {
             <a href="#apply" className="rounded-full bg-gold px-6 py-3 text-sm font-medium text-foreground hover:opacity-90">
               Apply to list →
             </a>
-            <Link to="/vendors/dashboard" className="rounded-full border border-gold/40 bg-background/5 px-6 py-3 text-sm font-medium text-background hover:bg-background/10">
-              See growth packs
+            <Link to="/vendors/growth-packs" className="rounded-full border border-gold/40 bg-background/5 px-6 py-3 text-sm font-medium text-background hover:bg-background/10">
+              See growth packs →
             </Link>
           </div>
         </div>
@@ -104,7 +104,7 @@ function VendorsLanding() {
               <div className="font-display text-xl font-semibold">✓ Application received</div>
               <p className="mt-1 text-sm text-foreground/75">
                 Our editor will be in touch within 48 hours. Meanwhile,{" "}
-                <Link to="/vendors/dashboard" className="text-oxblood underline">
+                <Link to="/vendors/growth-packs" className="text-oxblood underline">
                   preview growth packs
                 </Link>
                 .

@@ -142,11 +142,11 @@ function SearchPage() {
             </h2>
             <Link to="/" className="text-sm text-oxblood hover:underline">Back to feed →</Link>
           </div>
-          {showSuggestions && (
-            <p className="mt-2 text-sm text-muted-foreground">
-              Nothing matched the exact brief — here are the closest curated picks for you.
-            </p>
-          )}
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            {showSuggestions
+              ? "Nothing matched the exact brief — but here's more for you to explore, discover, and replicate."
+              : "Here's more for you to explore, discover, and replicate — every affair below is real, vendor-vetted, and ready to recreate in your city."}
+          </p>
           <div className="masonry mt-6">
             {list.map((p) => <PartyCard key={p.slug} party={p} />)}
           </div>

@@ -1,36 +1,43 @@
 import { Link } from "@tanstack/react-router";
+import { useState } from "react";
 
 const links = [
-  { to: "/" as const, label: "Feed" },
-  { to: "/search" as const, label: "Search" },
-  { to: "/exclusive" as const, label: "Exclusive" },
+  { to: "/" as const, label: "Home" },
+  { to: "/exclusive" as const, label: "Exclusive Affairs" },
+  { to: "/assistant" as const, label: "Affair Assistant" },
   { to: "/kits" as const, label: "Party Kits" },
-  { to: "/calculator" as const, label: "Budget" },
+  { to: "/calculator" as const, label: "Budget Calculator" },
   { to: "/vendors" as const, label: "For Vendors" },
 ];
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 md:px-8">
-        <Link to="/" className="flex items-center gap-3">
-          <span className="grid h-9 w-9 place-items-center rounded-full bg-oxblood font-display text-sm italic text-gold">H</span>
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/90 backdrop-blur-md">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 md:px-8 md:py-4">
+        <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-oxblood font-display text-base italic text-gold shadow-soft md:h-11 md:w-11">
+            H
+          </span>
           <div className="leading-none">
-            <div className="font-display text-lg font-semibold tracking-tight">House of Affairs</div>
-            <div className="hidden text-[10px] uppercase tracking-[0.25em] text-muted-foreground md:block">
-              by invitation, by design
+            <div className="font-display text-xl font-semibold tracking-tight md:text-2xl">
+              House of <span className="italic text-oxblood">Affairs</span>
+            </div>
+            <div className="mt-0.5 hidden text-[10px] uppercase tracking-[0.28em] text-muted-foreground md:block">
+              by invitation · by design
             </div>
           </div>
         </Link>
-        <nav className="hidden items-center gap-1 md:flex">
+
+        <nav className="hidden items-center gap-1 lg:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="rounded-full px-3.5 py-1.5 text-sm text-foreground/70 transition-colors hover:text-foreground"
+              className="rounded-full px-3 py-1.5 text-sm text-foreground/75 transition-colors hover:text-foreground"
               activeProps={{
                 className:
-                  "rounded-full px-3.5 py-1.5 text-sm bg-blush-soft text-oxblood ring-1 ring-oxblood/20",
+                  "rounded-full px-3 py-1.5 text-sm bg-blush-soft text-oxblood ring-1 ring-oxblood/20",
               }}
               activeOptions={{ exact: true }}
             >
@@ -38,13 +45,55 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
-        <Link
-          to="/search"
-          className="rounded-full bg-oxblood px-4 py-2 text-sm font-medium text-primary-foreground shadow-soft ring-1 ring-gold/40 transition hover:opacity-95"
-        >
-          Plan an affair
-        </Link>
+
+        <div className="flex items-center gap-2">
+          <Link
+            to="/assistant"
+            className="hidden rounded-full bg-oxblood px-4 py-2 text-xs font-medium text-primary-foreground shadow-soft ring-1 ring-gold/40 transition hover:opacity-95 md:inline-block md:text-sm md:px-5"
+          >
+            Plan an affair
+          </Link>
+          <button
+            type="button"
+            aria-label="Menu"
+            onClick={() => setOpen((v) => !v)}
+            className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card lg:hidden"
+          >
+            <span className="text-lg">{open ? "✕" : "☰"}</span>
+          </button>
+        </div>
       </div>
+
+      {open && (
+        <nav className="border-t border-border bg-background lg:hidden">
+          <div className="mx-auto max-w-7xl px-4 py-3">
+            <ul className="grid gap-1">
+              {links.map((l) => (
+                <li key={l.to}>
+                  <Link
+                    to={l.to}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-xl px-3 py-3 text-sm text-foreground/85 hover:bg-secondary"
+                    activeProps={{ className: "block rounded-xl px-3 py-3 text-sm bg-blush-soft text-oxblood font-medium" }}
+                    activeOptions={{ exact: true }}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-2">
+                <Link
+                  to="/assistant"
+                  onClick={() => setOpen(false)}
+                  className="block rounded-full bg-oxblood px-4 py-3 text-center text-sm font-medium text-primary-foreground ring-1 ring-gold/40"
+                >
+                  Plan an affair →
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

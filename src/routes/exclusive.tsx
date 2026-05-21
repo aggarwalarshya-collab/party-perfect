@@ -95,7 +95,7 @@ function ExclusivePage() {
             </div>
             <div className="md:justify-self-end">
               <button className="rounded-full bg-gold px-6 py-3 text-sm font-medium text-foreground hover:opacity-90">
-                Join the House · ₹4,999/yr
+                Host Pass · ₹499 / 3 months
               </button>
             </div>
           </div>
