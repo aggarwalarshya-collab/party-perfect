@@ -14,7 +14,9 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as KitsRouteImport } from './routes/kits'
 import { Route as ExclusiveRouteImport } from './routes/exclusive'
 import { Route as CalculatorRouteImport } from './routes/calculator'
+import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as VendorsGrowthPacksRouteImport } from './routes/vendors.growth-packs'
 import { Route as VendorsDashboardRouteImport } from './routes/vendors.dashboard'
 import { Route as VendorSlugRouteImport } from './routes/vendor.$slug'
 import { Route as PartySlugRouteImport } from './routes/party.$slug'
@@ -44,10 +46,20 @@ const CalculatorRoute = CalculatorRouteImport.update({
   path: '/calculator',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AssistantRoute = AssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const VendorsGrowthPacksRoute = VendorsGrowthPacksRouteImport.update({
+  id: '/growth-packs',
+  path: '/growth-packs',
+  getParentRoute: () => VendorsRoute,
 } as any)
 const VendorsDashboardRoute = VendorsDashboardRouteImport.update({
   id: '/dashboard',
@@ -67,6 +79,7 @@ const PartySlugRoute = PartySlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/calculator': typeof CalculatorRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
@@ -75,9 +88,11 @@ export interface FileRoutesByFullPath {
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
   '/vendors/dashboard': typeof VendorsDashboardRoute
+  '/vendors/growth-packs': typeof VendorsGrowthPacksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/calculator': typeof CalculatorRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
@@ -86,10 +101,12 @@ export interface FileRoutesByTo {
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
   '/vendors/dashboard': typeof VendorsDashboardRoute
+  '/vendors/growth-packs': typeof VendorsGrowthPacksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/assistant': typeof AssistantRoute
   '/calculator': typeof CalculatorRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
@@ -98,11 +115,13 @@ export interface FileRoutesById {
   '/party/$slug': typeof PartySlugRoute
   '/vendor/$slug': typeof VendorSlugRoute
   '/vendors/dashboard': typeof VendorsDashboardRoute
+  '/vendors/growth-packs': typeof VendorsGrowthPacksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/assistant'
     | '/calculator'
     | '/exclusive'
     | '/kits'
@@ -111,9 +130,11 @@ export interface FileRouteTypes {
     | '/party/$slug'
     | '/vendor/$slug'
     | '/vendors/dashboard'
+    | '/vendors/growth-packs'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/assistant'
     | '/calculator'
     | '/exclusive'
     | '/kits'
@@ -122,9 +143,11 @@ export interface FileRouteTypes {
     | '/party/$slug'
     | '/vendor/$slug'
     | '/vendors/dashboard'
+    | '/vendors/growth-packs'
   id:
     | '__root__'
     | '/'
+    | '/assistant'
     | '/calculator'
     | '/exclusive'
     | '/kits'
@@ -133,10 +156,12 @@ export interface FileRouteTypes {
     | '/party/$slug'
     | '/vendor/$slug'
     | '/vendors/dashboard'
+    | '/vendors/growth-packs'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AssistantRoute: typeof AssistantRoute
   CalculatorRoute: typeof CalculatorRoute
   ExclusiveRoute: typeof ExclusiveRoute
   KitsRoute: typeof KitsRoute
@@ -183,12 +208,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CalculatorRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/assistant': {
+      id: '/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/vendors/growth-packs': {
+      id: '/vendors/growth-packs'
+      path: '/growth-packs'
+      fullPath: '/vendors/growth-packs'
+      preLoaderRoute: typeof VendorsGrowthPacksRouteImport
+      parentRoute: typeof VendorsRoute
     }
     '/vendors/dashboard': {
       id: '/vendors/dashboard'
@@ -216,10 +255,12 @@ declare module '@tanstack/react-router' {
 
 interface VendorsRouteChildren {
   VendorsDashboardRoute: typeof VendorsDashboardRoute
+  VendorsGrowthPacksRoute: typeof VendorsGrowthPacksRoute
 }
 
 const VendorsRouteChildren: VendorsRouteChildren = {
   VendorsDashboardRoute: VendorsDashboardRoute,
+  VendorsGrowthPacksRoute: VendorsGrowthPacksRoute,
 }
 
 const VendorsRouteWithChildren =
@@ -227,6 +268,7 @@ const VendorsRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AssistantRoute: AssistantRoute,
   CalculatorRoute: CalculatorRoute,
   ExclusiveRoute: ExclusiveRoute,
   KitsRoute: KitsRoute,
@@ -238,3 +280,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
