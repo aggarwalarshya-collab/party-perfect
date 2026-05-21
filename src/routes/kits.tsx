@@ -42,7 +42,7 @@ function KitsPage() {
                   ✦ Sneak peek
                 </span>
                 <span className="absolute right-3 top-3 rounded-full bg-oxblood px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-background">
-                  ₹{k.price}
+                  From ₹{k.standardPrice}
                 </span>
               </div>
               <div className="p-6">
@@ -57,12 +57,12 @@ function KitsPage() {
                   ))}
                 </div>
 
-                <div className="mt-6 flex items-end justify-between">
+                <div className="mt-6 flex items-end justify-between gap-3">
                   <div>
-                    <div className="text-xs uppercase tracking-wider text-muted-foreground">One-time</div>
-                    <div className="font-display text-3xl font-semibold">₹{k.price}</div>
+                    <div className="text-xs uppercase tracking-wider text-muted-foreground">Standard / Customised</div>
+                    <div className="font-display text-2xl font-semibold">₹{k.standardPrice} <span className="text-base text-muted-foreground">· ₹{k.customPrice}</span></div>
                   </div>
-                  <button className="rounded-full bg-oxblood px-5 py-2.5 text-sm font-medium text-background transition hover:opacity-90">
+                  <button className="rounded-full bg-oxblood px-4 py-2.5 text-sm font-medium text-background transition hover:opacity-90">
                     Add to cart
                   </button>
                 </div>
