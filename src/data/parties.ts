@@ -12,6 +12,10 @@ import chefs from "@/assets/party-chefs.jpg";
 import tacos from "@/assets/party-tacos.jpg";
 import karaoke from "@/assets/party-karaoke.jpg";
 import housewarming from "@/assets/party-housewarming.jpg";
+import spa from "@/assets/party-spa.jpg";
+import golf from "@/assets/party-golf.jpg";
+import christmas from "@/assets/party-christmas.jpg";
+import onam from "@/assets/party-onam.jpg";
 import celeb from "@/assets/exclusive-celeb.jpg";
 import influencer from "@/assets/exclusive-influencer.jpg";
 import wedding from "@/assets/exclusive-wedding.jpg";
@@ -329,6 +333,87 @@ export const parties: Party[] = [
       { slug: "bloom-arch", name: "Bloom & Arch Co.", role: "Floral console + drapes", price: "₹22,000" },
       { slug: "grazing-plate", name: "The Grazing Plate", role: "Cheese + grazing table", price: "₹16,000" },
       { slug: "skyline-sutra", name: "Champagne Tower Co.", role: "Bar + tower", price: "₹14,000" },
+    ],
+  },
+  {
+    slug: "spa-day-at-home",
+    title: "Spa Day at Home",
+    tagline: "Robes, rose petals in marble bowls, eucalyptus steam — a Sunday that resets the week.",
+    occasion: "House Party",
+    vibe: "Wellness · Intimate",
+    city: "Bangalore",
+    guests: "4–8",
+    budget: 26000,
+    budgetLabel: "₹20–32K",
+    badge: "New",
+    image: spa,
+    span: "regular",
+    kit: "Dinner Party Kit",
+    social: { loved: "Wellness pick", replicated: 52 },
+    vendors: [
+      { slug: "petal-wax", name: "Petal & Wax", role: "Florals + candles", price: "₹8,000" },
+      { slug: "chef-anaya", name: "Glow Therapy Co.", role: "On-call therapists (2)", price: "₹14,000" },
+    ],
+  },
+  {
+    slug: "boys-golf-game-night",
+    title: "Boys' Mini-Golf Night",
+    tagline: "Indoor putting green, whisky flights, leather chesterfields — Augusta meets your living room.",
+    occasion: "Bachelor",
+    vibe: "Masculine · Playful",
+    city: "Delhi NCR",
+    guests: "6–10",
+    budget: 34000,
+    budgetLabel: "₹28–40K",
+    badge: "New",
+    image: golf,
+    span: "regular",
+    kit: "Dinner Party Kit",
+    social: { replicated: 23 },
+    vendors: [
+      { slug: "maison-noir", name: "Greens & Grain Co.", role: "Putting green + setup", price: "₹14,000" },
+      { slug: "skyline-sutra", name: "Skyline Sutra", role: "Whisky pairing bar", price: "₹12,000" },
+    ],
+  },
+  {
+    slug: "christmas-brunch",
+    title: "Christmas Brunch at Home",
+    tagline: "Pine garland down a long white table, gold cutlery, crimson ribbon, mimosas in cut glass.",
+    occasion: "Festive",
+    vibe: "Festive · Daytime",
+    city: "Mumbai",
+    guests: "12–20",
+    budget: 58000,
+    budgetLabel: "₹45–70K",
+    badge: "Seasonal",
+    image: christmas,
+    span: "regular",
+    kit: "Dinner Party Kit",
+    social: { loved: "December favourite", replicated: 67 },
+    vendors: [
+      { slug: "bloom-arch", name: "Bloom & Arch Co.", role: "Garland + tablescape", price: "₹22,000" },
+      { slug: "grazing-plate", name: "The Grazing Plate", role: "Brunch + grazing", price: "₹20,000" },
+      { slug: "chef-anaya", name: "Chef Anaya", role: "Roast + dessert course", price: "₹14,000" },
+    ],
+  },
+  {
+    slug: "onam-sadhya",
+    title: "Onam Sadhya at Home",
+    tagline: "Banana leaves, twenty-six dishes, pookalam at the door, jasmine in the air.",
+    occasion: "Festive",
+    vibe: "Traditional · Festive",
+    city: "Bangalore",
+    guests: "15–25",
+    budget: 48000,
+    budgetLabel: "₹38–58K",
+    badge: "Seasonal",
+    image: onam,
+    span: "regular",
+    kit: "Diwali Hosting Kit",
+    social: { loved: "Most loved down south", replicated: 41 },
+    vendors: [
+      { slug: "chatori-galli", name: "Sadhya Stories", role: "26-item sadhya catering", price: "₹26,000" },
+      { slug: "marigold-lane", name: "Marigold Lane", role: "Pookalam + brass diyas", price: "₹14,000" },
     ],
   },
 ];
