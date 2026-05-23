@@ -70,7 +70,7 @@ function VendorDetail() {
             <div>
               <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Serves</div>
               <ul className="mt-2 flex flex-wrap gap-1.5">
-                {vendor.serves.map((s) => (
+                {vendor.serves.map((s: string) => (
                   <li key={s} className="rounded-full bg-secondary px-3 py-1 text-xs">{s}</li>
                 ))}
               </ul>
@@ -78,7 +78,7 @@ function VendorDetail() {
             <div>
               <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Specialties</div>
               <ul className="mt-2 flex flex-wrap gap-1.5">
-                {vendor.specialties.map((s) => (
+                {vendor.specialties.map((s: string) => (
                   <li key={s} className="rounded-full bg-blush-soft px-3 py-1 text-xs text-oxblood">{s}</li>
                 ))}
               </ul>
