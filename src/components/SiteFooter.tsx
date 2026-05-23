@@ -13,7 +13,7 @@ export function SiteFooter() {
             beautiful celebrations, faster.
           </p>
           <p className="mt-6 text-xs uppercase tracking-[0.25em] text-gold/80">
-            By invitation · by design
+            Your house of planning celebrations
           </p>
         </div>
         <div>

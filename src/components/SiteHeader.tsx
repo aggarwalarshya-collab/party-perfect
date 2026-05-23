@@ -3,11 +3,11 @@ import { useState } from "react";
 
 const links = [
   { to: "/" as const, label: "Home" },
-  { to: "/exclusive" as const, label: "Exclusive Affairs" },
   { to: "/assistant" as const, label: "Affair Assistant" },
   { to: "/kits" as const, label: "Party Kits" },
   { to: "/calculator" as const, label: "Budget Calculator" },
-  { to: "/vendors" as const, label: "For Vendors" },
+  { to: "/exclusive" as const, label: "Exclusive Affairs" },
+  { to: "/vendors" as const, label: "List as a vendor" },
 ];
 
 export function SiteHeader() {
@@ -24,7 +24,7 @@ export function SiteHeader() {
               House of <span className="italic text-oxblood">Affairs</span>
             </div>
             <div className="mt-0.5 hidden text-[10px] uppercase tracking-[0.28em] text-muted-foreground md:block">
-              by invitation · by design
+              your house of planning celebrations
             </div>
           </div>
         </Link>
