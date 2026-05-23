@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { kits } from "@/data/parties";
 
 export const Route = createFileRoute("/kits")({
@@ -69,6 +69,26 @@ function KitsPage() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      {/* House member pitch */}
+      <section className="border-t border-border bg-blush-soft">
+        <div className="mx-auto max-w-5xl px-5 py-12 text-center md:px-8 md:py-16">
+          <div className="text-xs uppercase tracking-[0.28em] text-oxblood">House member perk</div>
+          <h2 className="mt-3 font-display text-2xl font-semibold leading-tight md:text-4xl">
+            Two kits, on the house. <span className="italic text-oxblood">Every quarter.</span>
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-foreground/75 md:text-base">
+            House members get two Standard Party Kits free, plus unlimited Premium Edits and
+            two Affair Assistant requests — all for ₹499 / 3 months.
+          </p>
+          <Link
+            to="/exclusive"
+            className="mt-6 inline-block rounded-full bg-oxblood px-6 py-3 text-sm font-medium text-background ring-1 ring-gold/40 hover:opacity-95"
+          >
+            Enter the House as a member →
+          </Link>
         </div>
       </section>
     </div>

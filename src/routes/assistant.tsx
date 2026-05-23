@@ -111,13 +111,13 @@ function AssistantPage() {
             </div>
             <div className="rounded-2xl border border-border bg-card p-6">
               <div className="text-xs uppercase tracking-[0.2em] text-oxblood">Doing more than one?</div>
-              <div className="mt-1 font-display text-xl font-semibold">Get the Host Pass</div>
+              <div className="mt-1 font-display text-xl font-semibold">Become a House member</div>
               <p className="mt-2 text-sm text-muted-foreground">
-                ₹499 for 3 months. 2 Assistant requests free, 2 Standard Templates free, full
-                Premium Edits access, weekend Affairs early access, vendor perks.
+                ₹499 for 3 months. 2 Assistant requests free, 2 Standard Kits free, unlimited
+                Premium Edits, weekend affair early access, vendor perks.
               </p>
               <Link to="/exclusive" className="mt-4 inline-block text-sm text-oxblood hover:underline">
-                See the Host Pass →
+                Enter the House →
               </Link>
             </div>
           </div>

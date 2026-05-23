@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { parties } from "@/data/parties";
 import { PartyCard } from "@/components/PartyCard";
@@ -8,9 +8,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "House of Affairs — the curated party-planning layer for urban India" },
-      { name: "description", content: "Discover, compare and assemble beautiful celebrations — vendors, party kits and the Affair Assistant. By invitation, by design." },
+      { name: "description", content: "Discover, compare and assemble beautiful celebrations — vendors, party kits and the Affair Assistant. Your house of planning celebrations." },
       { property: "og:title", content: "House of Affairs" },
-      { property: "og:description", content: "By invitation, by design." },
+      { property: "og:description", content: "Your house of planning celebrations." },
     ],
   }),
   component: FeedPage,
@@ -45,7 +45,7 @@ function FeedPage() {
         <div className="relative mx-auto max-w-6xl px-5 pb-14 pt-14 text-center md:px-8 md:pt-24 md:pb-24">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/5 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-gold backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            By invitation · by design
+            Your house of planning celebrations
           </div>
 
           <div className="mt-6 font-display text-3xl font-semibold tracking-tight text-gold md:text-4xl">
@@ -145,10 +145,58 @@ function FeedPage() {
           </div>
         </div>
 
-        <div className="masonry mt-8 md:mt-12">
+        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 md:mt-12">
           {parties.map((p) => (
             <PartyCard key={p.slug} party={p} />
           ))}
+        </div>
+      </section>
+
+      {/* AFFAIR ASSISTANT TEASER */}
+      <section className="border-t border-border bg-blush-soft">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 md:grid-cols-12 md:items-center md:gap-12 md:px-8 md:py-20">
+          <div className="md:col-span-7">
+            <div className="text-xs uppercase tracking-[0.28em] text-oxblood">Affair Assistant · ₹499/request</div>
+            <h2 className="mt-3 font-display text-3xl font-semibold leading-tight md:text-5xl">
+              Don't want to chase vendors? <span className="italic text-oxblood">Hand it over.</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-sm text-foreground/75 md:text-base">
+              Tell us the affair in two lines. We compare quotes, lock the dates, chase the
+              florist, and slide back into your DMs with one tidy package — all on WhatsApp.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link
+                to="/assistant"
+                className="rounded-full bg-oxblood px-5 py-3 text-sm font-medium text-background ring-1 ring-gold/40 hover:opacity-95"
+              >
+                Send a brief →
+              </Link>
+              <Link
+                to="/exclusive"
+                className="rounded-full border border-oxblood/40 bg-background px-5 py-3 text-sm font-medium text-oxblood hover:bg-oxblood hover:text-background"
+              >
+                Enter the House as a member
+              </Link>
+            </div>
+          </div>
+          <div className="md:col-span-5">
+            <div className="rounded-3xl border border-gold/30 bg-background p-6 shadow-lux md:p-8">
+              <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                <span className="h-1.5 w-1.5 rounded-full bg-oxblood" /> Sample brief on WhatsApp
+              </div>
+              <div className="mt-4 space-y-3 text-sm">
+                <div className="ml-auto max-w-[85%] rounded-2xl rounded-tr-sm bg-oxblood px-4 py-2.5 text-background">
+                  Sufi baithak at home, Sat 15th, 18 guests, Bandra, ~₹60K.
+                </div>
+                <div className="max-w-[85%] rounded-2xl rounded-tl-sm bg-secondary px-4 py-2.5 text-foreground">
+                  On it. Pulling 3 florists, 2 tabla trios, 1 kebab counter. Quotes by 8pm. ✦
+                </div>
+                <div className="ml-auto max-w-[60%] rounded-2xl rounded-tr-sm bg-oxblood px-4 py-2.5 text-background">
+                  You're a dream.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
