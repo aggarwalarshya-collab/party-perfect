@@ -87,9 +87,9 @@ function CalcPage() {
     <div>
       <section className="border-b border-border bg-oxblood-deep text-background">
         <div className="mx-auto max-w-7xl px-5 py-14 md:px-8 md:py-20">
-          <div className="text-xs uppercase tracking-[0.25em] text-gold">Budget calculator</div>
-          <h1 className="mt-2 font-display text-5xl font-semibold leading-[1] tracking-tight md:text-7xl">
-            How much will <br /><span className="italic text-gold">this affair cost?</span>
+          <div className="text-xs uppercase tracking-[0.25em] text-gold">Budget Calculator</div>
+          <h1 className="mt-2 font-display text-4xl font-semibold leading-[1] tracking-tight sm:text-5xl md:text-7xl">
+            Budget <span className="italic text-gold">Calculator.</span>
           </h1>
           <p className="mt-5 max-w-xl text-background/75">
             Grounded estimates from real vendor quotes in our network. Tweak the dials, then check
