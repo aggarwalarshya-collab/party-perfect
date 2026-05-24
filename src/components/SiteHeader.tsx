@@ -29,15 +29,15 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-3 lg:flex xl:gap-5">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="rounded-full px-3 py-1.5 text-sm text-foreground/75 transition-colors hover:text-foreground"
+              className="whitespace-nowrap rounded-full px-2 py-1.5 text-[12px] text-foreground/75 transition-colors hover:text-foreground xl:text-[13px]"
               activeProps={{
                 className:
-                  "rounded-full px-3 py-1.5 text-sm bg-blush-soft text-oxblood ring-1 ring-oxblood/20",
+                  "whitespace-nowrap rounded-full px-2 py-1.5 text-[12px] xl:text-[13px] bg-blush-soft text-oxblood ring-1 ring-oxblood/20",
               }}
               activeOptions={{ exact: true }}
             >
