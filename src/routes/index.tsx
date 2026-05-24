@@ -107,6 +107,9 @@ function FeedPage() {
               </button>
             ))}
           </div>
+          <p className="mx-auto mt-10 max-w-2xl font-display text-base italic text-gold/90 md:mt-14 md:text-xl">
+            Curate your affairs to perfection — with us.
+          </p>
         </div>
       </section>
 
