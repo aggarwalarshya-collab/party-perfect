@@ -45,7 +45,7 @@ function FeedPage() {
         <div className="relative mx-auto max-w-6xl px-5 pb-14 pt-14 text-center md:px-8 md:pt-24 md:pb-24">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/5 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-gold backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            Your house of planning celebrations
+            Your celebrations, our planning
           </div>
 
           <div className="mt-6 font-display text-3xl font-semibold tracking-tight text-gold md:text-4xl">
