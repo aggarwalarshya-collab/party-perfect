@@ -8,9 +8,9 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "House of Affairs — the curated party-planning layer for urban India" },
-      { name: "description", content: "Discover, compare and assemble beautiful celebrations — vendors, party kits and the Affair Assistant. Your house of planning celebrations." },
+      { name: "description", content: "Discover, compare and assemble beautiful celebrations — vendors, party kits and the Affair Assistant. Your celebrations, our planning." },
       { property: "og:title", content: "House of Affairs" },
-      { property: "og:description", content: "Your house of planning celebrations." },
+      { property: "og:description", content: "Your celebrations, our planning." },
     ],
   }),
   component: FeedPage,
