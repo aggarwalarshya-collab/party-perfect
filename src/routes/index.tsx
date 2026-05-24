@@ -3,6 +3,7 @@ import { useState } from "react";
 import { parties } from "@/data/parties";
 import { PartyCard } from "@/components/PartyCard";
 import hero from "@/assets/hero-affairs.jpg";
+import heroVideo from "@/assets/hero-affair-build.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
