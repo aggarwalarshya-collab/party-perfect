@@ -24,7 +24,7 @@ export function SiteHeader() {
               House of <span className="italic text-oxblood">Affairs</span>
             </div>
             <div className="mt-0.5 hidden text-[10px] uppercase tracking-[0.28em] text-muted-foreground md:block">
-              your house of planning celebrations
+              your celebrations, our planning
             </div>
           </div>
         </Link>
