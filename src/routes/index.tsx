@@ -48,10 +48,12 @@ function FeedPage() {
             loop
             playsInline
             preload="auto"
-            className="h-full w-full object-cover opacity-55"
+            className="h-full w-full object-cover opacity-90"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-oxblood-deep/55 via-oxblood-deep/75 to-oxblood-deep" />
+        {/* Subtle vignette only — keep the film visible */}
+        <div className="absolute inset-0 bg-gradient-to-b from-oxblood-deep/20 via-transparent to-oxblood-deep/85" />
+        <div className="absolute inset-0 bg-gradient-to-r from-oxblood-deep/30 via-transparent to-oxblood-deep/30" />
         <div className="relative mx-auto max-w-6xl px-5 pb-14 pt-14 text-center md:px-8 md:pt-24 md:pb-24">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/5 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-gold backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
