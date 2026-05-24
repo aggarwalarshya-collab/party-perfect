@@ -5,9 +5,9 @@ const links = [
   { to: "/" as const, label: "Home" },
   { to: "/assistant" as const, label: "Affair Assistant" },
   { to: "/kits" as const, label: "Party Kits" },
-  { to: "/calculator" as const, label: "Budget Calculator" },
-  { to: "/exclusive" as const, label: "Exclusive Affairs" },
-  { to: "/vendors" as const, label: "List as a vendor" },
+  { to: "/calculator" as const, label: "My Budget" },
+  { to: "/exclusive" as const, label: "Exclusives" },
+  { to: "/vendors" as const, label: "For Vendors" },
 ];
 
 export function SiteHeader() {
@@ -24,20 +24,20 @@ export function SiteHeader() {
               House of <span className="italic text-oxblood">Affairs</span>
             </div>
             <div className="mt-0.5 hidden text-[10px] uppercase tracking-[0.28em] text-muted-foreground md:block">
-              your house of planning celebrations
+              your celebrations, our planning
             </div>
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-3 lg:flex xl:gap-5">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="rounded-full px-3 py-1.5 text-sm text-foreground/75 transition-colors hover:text-foreground"
+              className="whitespace-nowrap rounded-full px-2 py-1.5 text-[12px] text-foreground/75 transition-colors hover:text-foreground xl:text-[13px]"
               activeProps={{
                 className:
-                  "rounded-full px-3 py-1.5 text-sm bg-blush-soft text-oxblood ring-1 ring-oxblood/20",
+                  "whitespace-nowrap rounded-full px-2 py-1.5 text-[12px] xl:text-[13px] bg-blush-soft text-oxblood ring-1 ring-oxblood/20",
               }}
               activeOptions={{ exact: true }}
             >

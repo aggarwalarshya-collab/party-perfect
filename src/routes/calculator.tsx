@@ -6,7 +6,7 @@ import { PartyCard } from "@/components/PartyCard";
 export const Route = createFileRoute("/calculator")({
   head: () => ({
     meta: [
-      { title: "Budget Calculator — House of Affairs" },
+      { title: "My Budget — House of Affairs" },
       { name: "description", content: "Estimate your party cost — then check curated options matching your budget." },
     ],
   }),
@@ -87,7 +87,7 @@ function CalcPage() {
     <div>
       <section className="border-b border-border bg-oxblood-deep text-background">
         <div className="mx-auto max-w-7xl px-5 py-14 md:px-8 md:py-20">
-          <div className="text-xs uppercase tracking-[0.25em] text-gold">Budget Calculator</div>
+          <div className="text-xs uppercase tracking-[0.25em] text-gold">My Budget</div>
           <h1 className="mt-2 font-display text-4xl font-semibold leading-[1] tracking-tight sm:text-5xl md:text-7xl">
             Budget <span className="italic text-gold">Calculator.</span>
           </h1>

@@ -13,17 +13,17 @@ export function SiteFooter() {
             beautiful celebrations, faster.
           </p>
           <p className="mt-6 text-xs uppercase tracking-[0.25em] text-gold/80">
-            Your house of planning celebrations
+            Your celebrations, our planning
           </p>
         </div>
         <div>
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-gold/70">For hosts</div>
           <ul className="mt-4 space-y-2 text-sm text-background/85">
             <li><Link to="/" className="hover:text-gold">Home</Link></li>
-            <li><Link to="/exclusive" className="hover:text-gold">Exclusive Affairs</Link></li>
+            <li><Link to="/exclusive" className="hover:text-gold">Exclusives</Link></li>
             <li><Link to="/assistant" className="hover:text-gold">Affair Assistant</Link></li>
             <li><Link to="/kits" className="hover:text-gold">Party Kits</Link></li>
-            <li><Link to="/calculator" className="hover:text-gold">Budget Calculator</Link></li>
+            <li><Link to="/calculator" className="hover:text-gold">My Budget</Link></li>
           </ul>
         </div>
         <div>

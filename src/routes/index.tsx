@@ -3,14 +3,15 @@ import { useState } from "react";
 import { parties } from "@/data/parties";
 import { PartyCard } from "@/components/PartyCard";
 import hero from "@/assets/hero-affairs.jpg";
+import heroVideo from "@/assets/hero-affair-build.mp4.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "House of Affairs — the curated party-planning layer for urban India" },
-      { name: "description", content: "Discover, compare and assemble beautiful celebrations — vendors, party kits and the Affair Assistant. Your house of planning celebrations." },
+      { name: "description", content: "Discover, compare and assemble beautiful celebrations — vendors, party kits and the Affair Assistant. Your celebrations, our planning." },
       { property: "og:title", content: "House of Affairs" },
-      { property: "og:description", content: "Your house of planning celebrations." },
+      { property: "og:description", content: "Your celebrations, our planning." },
     ],
   }),
   component: FeedPage,
@@ -39,13 +40,22 @@ function FeedPage() {
       {/* HERO — big brand presence, NL search, single beautiful image */}
       <section className="relative overflow-hidden border-b border-border bg-oxblood-deep text-background">
         <div className="absolute inset-0">
-          <img src={hero} alt="Curated dinner affair at home" width={1920} height={1080} className="h-full w-full object-cover opacity-45" />
+          <video
+            src={heroVideo.url}
+            poster={hero}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            className="h-full w-full object-cover opacity-55"
+          />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-oxblood-deep/65 via-oxblood-deep/85 to-oxblood-deep" />
+        <div className="absolute inset-0 bg-gradient-to-b from-oxblood-deep/55 via-oxblood-deep/75 to-oxblood-deep" />
         <div className="relative mx-auto max-w-6xl px-5 pb-14 pt-14 text-center md:px-8 md:pt-24 md:pb-24">
           <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-background/5 px-3 py-1 text-[10px] uppercase tracking-[0.3em] text-gold backdrop-blur">
             <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-            Your house of planning celebrations
+            Your celebrations, our planning
           </div>
 
           <div className="mt-6 font-display text-3xl font-semibold tracking-tight text-gold md:text-4xl">
@@ -97,6 +107,9 @@ function FeedPage() {
               </button>
             ))}
           </div>
+          <p className="mx-auto mt-10 max-w-2xl font-display text-base italic text-gold/90 md:mt-14 md:text-xl">
+            Curate your affairs to perfection — with us.
+          </p>
         </div>
       </section>
 
