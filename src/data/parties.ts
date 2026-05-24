@@ -16,6 +16,8 @@ import spa from "@/assets/party-spa.jpg";
 import golf from "@/assets/party-golf.jpg";
 import christmas from "@/assets/party-christmas.jpg";
 import onam from "@/assets/party-onam.jpg";
+import yoga from "@/assets/party-yoga.jpg";
+import cocktailCigar from "@/assets/party-cocktail-cigar.jpg";
 import celeb from "@/assets/exclusive-celeb.jpg";
 import influencer from "@/assets/exclusive-influencer.jpg";
 import wedding from "@/assets/exclusive-wedding.jpg";
