@@ -5,9 +5,9 @@ const links = [
   { to: "/" as const, label: "Home" },
   { to: "/assistant" as const, label: "Affair Assistant" },
   { to: "/kits" as const, label: "Party Kits" },
-  { to: "/calculator" as const, label: "Budget Calculator" },
-  { to: "/exclusive" as const, label: "Exclusive Affairs" },
-  { to: "/vendors" as const, label: "List as a vendor" },
+  { to: "/calculator" as const, label: "My Budget" },
+  { to: "/exclusive" as const, label: "Exclusives" },
+  { to: "/vendors" as const, label: "For Vendors" },
 ];
 
 export function SiteHeader() {
