@@ -38,6 +38,9 @@
   --color-oxblood-deep: var(--oxblood-deep);
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
+  --color-champagne: var(--champagne);
+  --color-champagne-soft: var(--champagne-soft);
+  --color-champagne-deep: var(--champagne-deep);
   --color-blush: var(--blush);
   --color-blush-soft: var(--blush-soft);
   --color-cream: var(--cream);
@@ -47,42 +50,50 @@
 :root {
   --radius: 0.875rem;
 
-  /* House of Affairs — Champagne Ivory · Warm White · Espresso · Deep Wine · Muted Gold · Blush Rose */
-  --background: oklch(0.965 0.018 88);          /* champagne ivory */
-  --foreground: oklch(0.20 0.018 40);           /* espresso black */
+  /* House of Affairs — Ivory · Espresso · Oxblood · Champagne · Blush */
+  --background: oklch(0.975 0.012 85);
+  --foreground: oklch(0.20 0.018 40);
   --ink: oklch(0.20 0.018 40);
-  --cream: oklch(0.965 0.018 88);
+  --cream: oklch(0.985 0.010 85);
 
-  --oxblood: oklch(0.34 0.12 18);               /* deep wine — primary CTA */
+  --oxblood: oklch(0.34 0.12 18);
   --oxblood-deep: oklch(0.26 0.10 18);
-  --gold: oklch(0.74 0.085 82);                 /* muted gold accent */
-  --gold-soft: oklch(0.88 0.045 85);
-  --blush: oklch(0.86 0.045 22);                /* blush rose highlight */
-  --blush-soft: oklch(0.93 0.025 22);
 
-  --card: oklch(0.99 0.006 88);                 /* warm white */
+  /* Champagne — pearly, slightly cool — never tan/yellow */
+  --champagne: oklch(0.86 0.045 78);
+  --champagne-soft: oklch(0.93 0.025 80);
+  --champagne-deep: oklch(0.74 0.055 72);
+
+  /* Legacy gold tokens map to champagne so existing classes stay consistent */
+  --gold: var(--champagne-deep);
+  --gold-soft: var(--champagne-soft);
+
+  --blush: oklch(0.88 0.04 22);
+  --blush-soft: oklch(0.95 0.018 25);
+
+  --card: oklch(0.995 0.005 85);
   --card-foreground: var(--foreground);
-  --popover: oklch(0.99 0.006 88);
+  --popover: oklch(0.995 0.005 85);
   --popover-foreground: var(--foreground);
 
   --primary: var(--oxblood);
-  --primary-foreground: oklch(0.985 0.012 85);
-  --secondary: oklch(0.93 0.022 85);
+  --primary-foreground: oklch(0.99 0.008 85);
+  --secondary: oklch(0.95 0.012 85);
   --secondary-foreground: var(--foreground);
-  --muted: oklch(0.94 0.015 85);
+  --muted: oklch(0.95 0.012 85);
   --muted-foreground: oklch(0.44 0.02 40);
   --accent: var(--blush);
   --accent-foreground: var(--foreground);
   --destructive: oklch(0.5 0.18 25);
   --destructive-foreground: oklch(0.98 0.01 80);
-  --border: oklch(0.88 0.018 80);
-  --input: oklch(0.88 0.018 80);
+  --border: oklch(0.90 0.014 80);
+  --input: oklch(0.90 0.014 80);
   --ring: var(--oxblood);
 
   --gradient-oxblood: linear-gradient(135deg, var(--oxblood-deep), var(--oxblood));
-  --gradient-gold: linear-gradient(135deg, var(--gold), var(--gold-soft));
-  --shadow-soft: 0 20px 50px -20px oklch(0.2 0.1 25 / 0.35);
-  --shadow-lux: 0 30px 80px -30px oklch(0.18 0.12 22 / 0.55);
+  --gradient-champagne: linear-gradient(135deg, var(--champagne-deep), var(--champagne-soft));
+  --shadow-soft: 0 20px 50px -20px oklch(0.2 0.1 25 / 0.30);
+  --shadow-lux: 0 30px 80px -30px oklch(0.18 0.12 22 / 0.50);
 
   --sidebar: var(--background);
   --sidebar-foreground: var(--foreground);
@@ -107,11 +118,11 @@
   --secondary-foreground: oklch(0.97 0.01 80);
   --muted: oklch(0.24 0.04 22);
   --muted-foreground: oklch(0.7 0.02 60);
-  --accent: var(--gold);
+  --accent: var(--champagne);
   --accent-foreground: oklch(0.18 0.04 25);
   --border: oklch(1 0 0 / 0.12);
   --input: oklch(1 0 0 / 0.15);
-  --ring: var(--gold);
+  --ring: var(--champagne);
 }
 
 @layer base {
@@ -134,7 +145,7 @@
   .font-display { font-family: var(--font-display); }
   .text-balance { text-wrap: balance; }
   .bg-gradient-oxblood { background-image: var(--gradient-oxblood); }
-  .bg-gradient-gold { background-image: var(--gradient-gold); }
+  .bg-gradient-champagne { background-image: var(--gradient-champagne); }
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-lux { box-shadow: var(--shadow-lux); }
 
@@ -146,25 +157,34 @@
   .bg-blush { background-color: var(--blush); }
   .bg-blush-soft { background-color: var(--blush-soft); }
   .text-blush { color: var(--blush); }
+  .text-champagne { color: var(--champagne); }
+  .text-champagne-deep { color: var(--champagne-deep); }
+  .bg-champagne { background-color: var(--champagne); }
+  .bg-champagne-soft { background-color: var(--champagne-soft); }
+  .bg-ivory { background-color: var(--background); }
+
+  /* Champagne sparkle accent for words like "affair" */
+  .text-sparkle {
+    background-image: linear-gradient(110deg,
+      var(--champagne-deep) 0%,
+      oklch(0.96 0.04 85) 40%,
+      var(--champagne-deep) 55%,
+      oklch(0.98 0.03 85) 75%,
+      var(--champagne-deep) 100%);
+    background-size: 220% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: sparkle-shift 7s linear infinite;
+  }
+  @keyframes sparkle-shift {
+    to { background-position: 220% center; }
+  }
 
   .ticker { animation: ticker 50s linear infinite; }
   @keyframes ticker {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
-  }
-
-  /* Pinterest-style masonry via CSS columns */
-  .masonry {
-    column-count: 1;
-    column-gap: 1rem;
-  }
-  @media (min-width: 640px) { .masonry { column-count: 2; } }
-  @media (min-width: 900px) { .masonry { column-count: 3; } }
-  @media (min-width: 1200px) { .masonry { column-count: 4; } }
-  .masonry > * {
-    break-inside: avoid;
-    margin-bottom: 1rem;
-    display: block;
   }
 
   .grain::after {
