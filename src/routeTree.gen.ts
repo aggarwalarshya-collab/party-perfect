@@ -14,6 +14,7 @@ import { Route as SearchRouteImport } from './routes/search'
 import { Route as KitsRouteImport } from './routes/kits'
 import { Route as ExclusiveRouteImport } from './routes/exclusive'
 import { Route as CalculatorRouteImport } from './routes/calculator'
+import { Route as BoardRouteImport } from './routes/board'
 import { Route as AssistantRouteImport } from './routes/assistant'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as VendorsGrowthPacksRouteImport } from './routes/vendors.growth-packs'
@@ -44,6 +45,11 @@ const ExclusiveRoute = ExclusiveRouteImport.update({
 const CalculatorRoute = CalculatorRouteImport.update({
   id: '/calculator',
   path: '/calculator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BoardRoute = BoardRouteImport.update({
+  id: '/board',
+  path: '/board',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AssistantRoute = AssistantRouteImport.update({
@@ -80,6 +86,7 @@ const PartySlugRoute = PartySlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/board': typeof BoardRoute
   '/calculator': typeof CalculatorRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/board': typeof BoardRoute
   '/calculator': typeof CalculatorRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/assistant': typeof AssistantRoute
+  '/board': typeof BoardRoute
   '/calculator': typeof CalculatorRoute
   '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/assistant'
+    | '/board'
     | '/calculator'
     | '/exclusive'
     | '/kits'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/assistant'
+    | '/board'
     | '/calculator'
     | '/exclusive'
     | '/kits'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/assistant'
+    | '/board'
     | '/calculator'
     | '/exclusive'
     | '/kits'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AssistantRoute: typeof AssistantRoute
+  BoardRoute: typeof BoardRoute
   CalculatorRoute: typeof CalculatorRoute
   ExclusiveRoute: typeof ExclusiveRoute
   KitsRoute: typeof KitsRoute
@@ -206,6 +219,13 @@ declare module '@tanstack/react-router' {
       path: '/calculator'
       fullPath: '/calculator'
       preLoaderRoute: typeof CalculatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/board': {
+      id: '/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof BoardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/assistant': {
@@ -269,6 +289,7 @@ const VendorsRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AssistantRoute: AssistantRoute,
+  BoardRoute: BoardRoute,
   CalculatorRoute: CalculatorRoute,
   ExclusiveRoute: ExclusiveRoute,
   KitsRoute: KitsRoute,

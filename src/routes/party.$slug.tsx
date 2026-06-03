@@ -1,7 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { parties, kits as allKits, vendors as allVendors } from "@/data/parties";
 import { PartyCard } from "@/components/PartyCard";
+import { board } from "@/lib/board";
+
+const SUPPORTED_CITIES = ["Mumbai", "Delhi NCR", "Bangalore", "Goa", "Pune"];
+const cityMul: Record<string, number> = { Mumbai: 1.2, "Delhi NCR": 1.1, Bangalore: 1.0, Goa: 1.15, Pune: 0.95 };
 
 export const Route = createFileRoute("/party/$slug")({
   loader: ({ params }) => {
@@ -38,6 +42,26 @@ function PartyDetail() {
   const [showReplicate, setShowReplicate] = useState(false);
   const [assistPaid, setAssistPaid] = useState(false);
   const [kitPaid, setKitPaid] = useState(false);
+
+  // Editable estimate inputs
+  const defaultGuests = Number((party.guests.match(/\d+/g) || ["10"]).slice(-1)[0]);
+  const [city, setCity] = useState(party.city);
+  const [guests, setGuests] = useState(defaultGuests);
+
+  useEffect(() => { board.trackBrowsed(party.slug); }, [party.slug]);
+
+  const cityAvailable = SUPPORTED_CITIES.includes(city);
+  const estimate = useMemo(() => {
+    const perHead = party.budget / defaultGuests;
+    const mul = cityMul[city] ?? 1;
+    const base = perHead * guests * mul;
+    return { low: Math.round(base * 0.85), high: Math.round(base * 1.15) };
+  }, [city, guests, party.budget, defaultGuests]);
+  const fmt = (n: number) => "₹" + Math.round(n).toLocaleString("en-IN");
+  const similarInCity = useMemo(
+    () => parties.filter((p) => p.slug !== party.slug && p.city === city).slice(0, 3),
+    [city, party.slug],
+  );
 
   // Related affairs — same occasion first, then same city
   const related = [
@@ -205,14 +229,65 @@ function PartyDetail() {
           <aside className="md:col-span-5">
             <div className="space-y-5 md:sticky md:top-24">
               <div className="rounded-2xl border-2 border-foreground bg-card p-6 md:p-7">
-                <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Estimated total</div>
-                <div className="mt-1 font-display text-3xl font-semibold md:text-4xl">{party.budgetLabel}</div>
-                <div className="mt-5 grid grid-cols-2 gap-3 text-sm">
-                  <Stat label="Guests" value={party.guests} />
-                  <Stat label="City" value={party.city} />
-                  <Stat label="Occasion" value={party.occasion} />
-                  <Stat label="Vibe" value={party.vibe} />
+                <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Your estimate</div>
+                <div className="mt-1 font-display text-3xl font-semibold md:text-4xl">
+                  {fmt(estimate.low)} – {fmt(estimate.high)}
                 </div>
+
+                <div className="mt-5 space-y-4">
+                  <div>
+                    <label className="text-[10px] uppercase tracking-wider text-muted-foreground">Guests · {guests}</label>
+                    <input
+                      type="range" min={2} max={150} value={guests}
+                      onChange={(e) => setGuests(Number(e.target.value))}
+                      className="mt-1 w-full accent-[var(--oxblood)]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] uppercase tracking-wider text-muted-foreground">City</label>
+                    <div className="mt-1 flex flex-wrap gap-1.5">
+                      {[...SUPPORTED_CITIES, "Other"].map((c) => (
+                        <button
+                          key={c}
+                          onClick={() => setCity(c)}
+                          className={`rounded-full border px-2.5 py-1 text-xs transition ${
+                            city === c ? "border-foreground bg-foreground text-background" : "border-border hover:border-foreground/40"
+                          }`}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <Stat label="Occasion" value={party.occasion} />
+                    <Stat label="Vibe" value={party.vibe} />
+                  </div>
+                </div>
+
+                {!cityAvailable && (
+                  <div className="mt-5 rounded-xl bg-blush-soft p-4 text-sm text-foreground">
+                    We don't curate <strong>{city}</strong> yet — but here are similar affairs we can pull off in your area:
+                    <div className="mt-3 space-y-1">
+                      {parties.slice(0, 3).map((p) => (
+                        <Link key={p.slug} to="/party/$slug" params={{ slug: p.slug }} className="block text-oxblood hover:underline">
+                          → {p.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {cityAvailable && similarInCity.length > 0 && (
+                  <div className="mt-5 text-xs text-muted-foreground">
+                    Also loved in {city}:{" "}
+                    {similarInCity.map((p, i) => (
+                      <span key={p.slug}>
+                        <Link to="/party/$slug" params={{ slug: p.slug }} className="text-oxblood hover:underline">{p.title}</Link>
+                        {i < similarInCity.length - 1 ? ", " : ""}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Paired kit upsell — fully integrated, with payment + WhatsApp flow */}
