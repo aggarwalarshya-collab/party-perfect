@@ -234,7 +234,7 @@ function FeedPage() {
                 ))}
               </div>
               <Link
-                to="/search"
+                to="/vendors"
                 className="mt-6 inline-block rounded-full bg-oxblood px-5 py-3 text-sm font-medium text-background ring-1 ring-champagne/40 hover:opacity-95"
               >
                 Browse the vendor directory →
