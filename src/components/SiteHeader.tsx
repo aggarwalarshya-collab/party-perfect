@@ -5,6 +5,7 @@ import { HouseLogo } from "./HouseLogo";
 const links = [
   { to: "/" as const, label: "Home" },
   { to: "/assistant" as const, label: "Affair Assistant" },
+  { to: "/directory" as const, label: "Vendors" },
   { to: "/kits" as const, label: "Party Kits" },
   { to: "/calculator" as const, label: "My Budget" },
   { to: "/board" as const, label: "My Board" },

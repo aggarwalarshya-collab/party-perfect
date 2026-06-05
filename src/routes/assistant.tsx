@@ -1,6 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { MemberBadge } from "@/components/MemberBadge";
 
 export const Route = createFileRoute("/assistant")({
   head: () => ({
@@ -136,22 +135,6 @@ function AssistantPage() {
         </div>
       </section>
 
-      {/* MEMBER block — branded, distinct */}
-      <section className="border-t border-border bg-gradient-champagne">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-5 py-12 text-center md:px-8 md:py-16">
-          <MemberBadge />
-          <h2 className="font-display text-3xl font-semibold leading-tight text-oxblood-deep md:text-4xl">
-            Doing more than one affair? Become a House member.
-          </h2>
-          <p className="max-w-xl text-sm text-oxblood-deep/80 md:text-base">
-            ₹499 / 3 months. 2 Assistant requests free, 2 Standard Kits free, unlimited Premium
-            Edits, weekend affair early access, vendor perks.
-          </p>
-          <Link to="/exclusive" className="rounded-full bg-oxblood-deep px-6 py-3 text-sm font-medium text-champagne hover:opacity-95">
-            Enter the House →
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }
