@@ -290,58 +290,42 @@ function PartyDetail() {
                 )}
               </div>
 
-              {/* Paired kit upsell — fully integrated, with payment + WhatsApp flow */}
-              <div className="overflow-hidden rounded-2xl bg-foreground text-background">
-                <img src={pairedKit.image} alt={pairedKit.name} loading="lazy" className="aspect-[5/3] w-full object-cover" />
-                <div className="p-6">
-                  <div className="text-xs uppercase tracking-[0.2em] text-gold">Pair with</div>
-                  <div className="mt-1 font-display text-xl font-semibold">{pairedKit.name}</div>
-                  <p className="mt-1 text-sm text-background/70">{pairedKit.items}</p>
-                  <div className="mt-4 flex items-center justify-between gap-3">
-                    <div>
-                      <div className="font-display text-2xl">₹{pairedKit.standardPrice}</div>
-                      <div className="text-[10px] uppercase tracking-wider text-background/60">Standard · ₹{pairedKit.customPrice} customised</div>
-                    </div>
-                    <button
-                      onClick={payKit}
-                      className="rounded-full bg-gold px-4 py-2 text-sm font-medium text-foreground hover:opacity-90"
-                    >
-                      {kitPaid ? "✓ Sent" : `Buy · ₹${pairedKit.standardPrice}`}
-                    </button>
-                  </div>
-                </div>
-              </div>
             </div>
           </aside>
         </div>
-      </section>
 
-      {/* MORE KITS to explore */}
-      <section className="border-t border-border bg-secondary/40">
-        <div className="mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-16">
-          <div className="flex items-end justify-between">
-            <div>
-              <div className="text-xs uppercase tracking-[0.25em] text-oxblood">More party kits</div>
-              <h2 className="mt-2 font-display text-2xl font-semibold md:text-3xl">Add a little extra polish.</h2>
+        {/* SUBTLE post-vendor add-ons — only after the vendor stack */}
+        <div className="mt-12 grid gap-4 md:grid-cols-2">
+          {/* Kit pitch — subtle, post vendor */}
+          <Link
+            to="/kits"
+            className="group flex items-center gap-4 rounded-2xl border border-border bg-card p-4 transition hover:border-oxblood/40 hover:shadow-soft"
+          >
+            <img src={pairedKit.image} alt={pairedKit.name} loading="lazy" className="h-16 w-24 flex-none rounded-xl object-cover" />
+            <div className="min-w-0">
+              <div className="text-[10px] uppercase tracking-wider text-oxblood">Add a finishing touch · optional</div>
+              <div className="mt-0.5 font-display text-base font-semibold truncate group-hover:text-oxblood">{pairedKit.name} — from ₹{pairedKit.standardPrice}</div>
+              <div className="text-xs text-muted-foreground line-clamp-1">{pairedKit.items}</div>
             </div>
-            <Link to="/kits" className="text-sm text-oxblood hover:underline">All kits →</Link>
-          </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {moreKits.map((k) => (
-              <Link key={k.slug} to="/kits" className="group block overflow-hidden rounded-2xl bg-card ring-1 ring-border transition hover:-translate-y-0.5 hover:shadow-soft">
-                <img src={k.image} alt={k.name} loading="lazy" className="aspect-[5/3] w-full object-cover transition group-hover:scale-105" />
-                <div className="flex items-center justify-between p-4">
-                  <div className="min-w-0">
-                    <div className="font-display text-base font-semibold">{k.name}</div>
-                    <div className="text-xs text-muted-foreground">From ₹{k.standardPrice}</div>
-                  </div>
-                  <span className="text-xs text-oxblood">View →</span>
-                </div>
-              </Link>
-            ))}
-          </div>
+            <span className="ml-auto text-sm text-oxblood">→</span>
+          </Link>
+
+          {/* Small member pitch — only at the end of the booking journey */}
+          <Link
+            to="/exclusive"
+            className="group flex items-center gap-4 rounded-2xl border border-champagne/40 bg-blush-soft p-4 transition hover:border-oxblood/40"
+          >
+            <div className="grid h-12 w-12 flex-none place-items-center rounded-full bg-oxblood text-champagne">✦</div>
+            <div className="min-w-0">
+              <div className="text-[10px] uppercase tracking-wider text-oxblood-deep">House member · ₹499 / 3 mo</div>
+              <div className="mt-0.5 font-display text-base font-semibold text-oxblood-deep">Hosting more than one? Enter the House.</div>
+              <div className="text-xs text-oxblood-deep/70">2 Assistant requests free · kits · weekend early access</div>
+            </div>
+            <span className="ml-auto text-sm text-oxblood-deep">→</span>
+          </Link>
         </div>
       </section>
+
 
       {/* MORE AFFAIRS — related by occasion */}
       <section className="mx-auto max-w-7xl px-4 pb-16 pt-12 md:px-8 md:pb-20">
