@@ -41,7 +41,6 @@ function PartyDetail() {
   const { party } = Route.useLoaderData();
   const [showReplicate, setShowReplicate] = useState(false);
   const [assistPaid, setAssistPaid] = useState(false);
-  const [kitPaid, setKitPaid] = useState(false);
 
   // Editable estimate inputs
   const defaultGuests = Number((party.guests.match(/\d+/g) || ["10"]).slice(-1)[0]);
@@ -70,7 +69,6 @@ function PartyDetail() {
   ].slice(0, 3);
 
   const pairedKit = allKits.find((k) => k.name === party.kit) ?? allKits[0];
-  const moreKits = allKits.filter((k) => k.slug !== pairedKit.slug).slice(0, 3);
 
   const replicateOptions = [
     { tier: "Lean", budget: "₹35–55K", vendors: 4, vibe: "DIY-friendly with our base vendors." },
@@ -85,11 +83,7 @@ function PartyDetail() {
     );
     setTimeout(() => window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, "_blank"), 400);
   };
-  const payKit = () => {
-    setKitPaid(true);
-    const msg = encodeURIComponent(`Hi! I just bought the ${pairedKit.name} (₹${pairedKit.standardPrice}). Please send it across.`);
-    setTimeout(() => window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, "_blank"), 400);
-  };
+
 
   return (
     <article>
