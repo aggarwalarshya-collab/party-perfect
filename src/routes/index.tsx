@@ -56,11 +56,25 @@ function FeedPage() {
   const [filter, setFilter] = useState<Filter>("All");
   const [shown, setShown] = useState(STEP_MOBILE);
 
+  // Parse "starting from" price out of budgetLabel (e.g. "₹3K–10K" → 3000)
+  const startsAt = (p: typeof parties[number]) => {
+    const m = p.budgetLabel.match(/₹\s*(\d+)\s*[K]?\s*[–-]/i);
+    return m ? parseInt(m[1], 10) * 1000 : p.budget;
+  };
+  const PREMIUM_SLUGS = new Set([
+    "cocktail-cigar-club",
+    "chefs-table-at-home",
+    "noir-anniversary-dinner",
+    "sufi-baithak-night",
+    "diwali-baithak",
+    "modern-sangeet",
+  ]);
+
   const filtered = useMemo(() => {
     if (filter === "All") return parties;
-    if (filter === "Under ₹5K") return parties.filter((p) => p.budget <= 5000);
-    if (filter === "Under ₹10K") return parties.filter((p) => p.budget <= 10000);
-    if (filter === "Premium") return parties.filter((p) => p.budget >= 50000);
+    if (filter === "Under ₹5K") return parties.filter((p) => startsAt(p) <= 6000);
+    if (filter === "Under ₹10K") return parties.filter((p) => startsAt(p) <= 10000);
+    if (filter === "Premium") return parties.filter((p) => PREMIUM_SLUGS.has(p.slug) || p.budget >= 25000 || p.badge === "Editor's Pick");
     if (filter === "Seasonal") return parties.filter((p) => p.badge === "Seasonal" || /diwali|christmas|onam|festive/i.test(p.title));
     if (filter === "Unique & Trending") return parties.filter((p) => p.badge === "Trending" || p.badge === "Editor's Pick");
     if (filter === "Food") return parties.filter((p) => /chef|tacos|brunch|dinner|sadhya|grazing|cocktail|cigar|bbq|baithak/i.test(p.title + p.tagline));
