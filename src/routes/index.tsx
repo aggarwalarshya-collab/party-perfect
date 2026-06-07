@@ -56,11 +56,25 @@ function FeedPage() {
   const [filter, setFilter] = useState<Filter>("All");
   const [shown, setShown] = useState(STEP_MOBILE);
 
+  // Parse "starting from" price out of budgetLabel (e.g. "₹3K–10K" → 3000)
+  const startsAt = (p: typeof parties[number]) => {
+    const m = p.budgetLabel.match(/₹\s*(\d+)\s*[K]?\s*[–-]/i);
+    return m ? parseInt(m[1], 10) * 1000 : p.budget;
+  };
+  const PREMIUM_SLUGS = new Set([
+    "cocktail-cigar-club",
+    "chefs-table-at-home",
+    "noir-anniversary-dinner",
+    "sufi-baithak-night",
+    "diwali-baithak",
+    "modern-sangeet",
+  ]);
+
   const filtered = useMemo(() => {
     if (filter === "All") return parties;
-    if (filter === "Under ₹5K") return parties.filter((p) => p.budget <= 5000);
-    if (filter === "Under ₹10K") return parties.filter((p) => p.budget <= 10000);
-    if (filter === "Premium") return parties.filter((p) => p.budget >= 50000);
+    if (filter === "Under ₹5K") return parties.filter((p) => startsAt(p) <= 6000);
+    if (filter === "Under ₹10K") return parties.filter((p) => startsAt(p) <= 10000);
+    if (filter === "Premium") return parties.filter((p) => PREMIUM_SLUGS.has(p.slug) || p.budget >= 25000 || p.badge === "Editor's Pick");
     if (filter === "Seasonal") return parties.filter((p) => p.badge === "Seasonal" || /diwali|christmas|onam|festive/i.test(p.title));
     if (filter === "Unique & Trending") return parties.filter((p) => p.badge === "Trending" || p.badge === "Editor's Pick");
     if (filter === "Food") return parties.filter((p) => /chef|tacos|brunch|dinner|sadhya|grazing|cocktail|cigar|bbq|baithak/i.test(p.title + p.tagline));
@@ -165,7 +179,7 @@ function FeedPage() {
       </div>
 
       {/* FEED — cream base, blends seamlessly with subsequent sections */}
-      <section className="relative mx-auto max-w-7xl px-4 py-12 md:px-8 md:py-20">
+      <section className="relative mx-auto max-w-7xl px-4 pt-12 pb-6 md:px-8 md:pt-16 md:pb-8">
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-12 -z-10 flex justify-center">
           <div className="h-72 w-[80%] rounded-full bg-blush-soft blur-3xl opacity-60" />
         </div>
@@ -236,34 +250,35 @@ function FeedPage() {
         )}
       </section>
 
-      {/* HOW IT WORKS — visually unified, with imagery, less text */}
+      {/* HOW IT WORKS — compact strip */}
       <section className="relative overflow-hidden bg-cream">
-        <div aria-hidden className="pointer-events-none absolute -right-32 top-0 h-96 w-96 rounded-full bg-blush-soft blur-3xl opacity-70" />
-        <div className="mx-auto max-w-7xl px-5 py-16 md:px-8 md:py-24">
-          <div className="text-center">
-            <div className="text-xs uppercase tracking-[0.28em] text-oxblood">How it works</div>
-            <h2 className="mt-2 font-display text-3xl font-semibold leading-tight md:text-5xl">
-              Scroll. Curate. <span className="italic text-sparkle">Celebrate.</span>
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              { n: "01", icon: "✦", t: "Tell us the affair", d: "Type the brief or browse the feed." },
-              { n: "02", icon: "♡", t: "Save & replicate", d: "Heart what you love — we surface vendors in your city." },
-              { n: "03", icon: "✉", t: "Hand it to us", d: "₹499 / request. We do the chasing on WhatsApp." },
-            ].map((s) => (
-              <div key={s.n} className="rounded-3xl bg-background p-6 ring-1 ring-border shadow-soft md:p-8">
-                <div className="flex items-baseline justify-between">
-                  <span className="font-display text-4xl text-oxblood">{s.n}</span>
-                  <span className="text-2xl text-champagne-deep">{s.icon}</span>
+        <div className="mx-auto max-w-7xl px-5 py-8 md:px-8 md:py-10">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.28em] text-oxblood">How it works</div>
+              <h2 className="mt-1 font-display text-2xl font-semibold leading-tight md:text-3xl">
+                Scroll. Curate. <span className="italic text-sparkle">Celebrate.</span>
+              </h2>
+            </div>
+            <div className="grid w-full gap-2 sm:grid-cols-3 md:max-w-2xl">
+              {[
+                { n: "01", t: "Tell us the affair", d: "Brief or browse." },
+                { n: "02", t: "Save & replicate", d: "We surface vendors." },
+                { n: "03", t: "Hand it over", d: "₹499 · 24 hr WhatsApp." },
+              ].map((s) => (
+                <div key={s.n} className="flex items-start gap-3 rounded-2xl bg-background/70 px-3 py-2.5 ring-1 ring-border">
+                  <span className="font-display text-lg text-oxblood">{s.n}</span>
+                  <div className="min-w-0">
+                    <div className="text-[13px] font-semibold leading-tight">{s.t}</div>
+                    <div className="text-[11px] text-foreground/65">{s.d}</div>
+                  </div>
                 </div>
-                <div className="mt-4 font-display text-xl font-semibold md:text-2xl">{s.t}</div>
-                <p className="mt-1 text-sm text-foreground/70">{s.d}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
 
       {/* DIRECTORY + INLINE CALCULATOR — single seamless block */}
       <section className="relative bg-cream">

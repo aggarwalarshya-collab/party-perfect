@@ -10,7 +10,6 @@ const links = [
   { to: "/calculator" as const, label: "My Budget" },
   { to: "/board" as const, label: "My Board" },
   { to: "/exclusive" as const, label: "Exclusives" },
-  { to: "/vendors" as const, label: "For Vendors" },
 ];
 
 export function SiteHeader() {
