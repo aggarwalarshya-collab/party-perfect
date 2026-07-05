@@ -304,19 +304,6 @@ function PartyDetail() {
             <span className="ml-auto text-sm text-oxblood">→</span>
           </Link>
 
-          {/* Small member pitch — only at the end of the booking journey */}
-          <Link
-            to="/exclusive"
-            className="group flex items-center gap-4 rounded-2xl border border-champagne/40 bg-blush-soft p-4 transition hover:border-oxblood/40"
-          >
-            <div className="grid h-12 w-12 flex-none place-items-center rounded-full bg-oxblood text-champagne">✦</div>
-            <div className="min-w-0">
-              <div className="text-[10px] uppercase tracking-wider text-oxblood-deep">House member · ₹499 / 3 mo</div>
-              <div className="mt-0.5 font-display text-base font-semibold text-oxblood-deep">Hosting more than one? Enter the House.</div>
-              <div className="text-xs text-oxblood-deep/70">2 Assistant requests free · kits · weekend early access</div>
-            </div>
-            <span className="ml-auto text-sm text-oxblood-deep">→</span>
-          </Link>
         </div>
       </section>
 

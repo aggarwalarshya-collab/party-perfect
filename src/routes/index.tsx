@@ -280,40 +280,11 @@ function FeedPage() {
       </section>
 
 
-      {/* DIRECTORY + INLINE CALCULATOR — single seamless block */}
+      {/* INLINE CALCULATOR */}
       <section className="relative bg-cream">
-        <div className="mx-auto max-w-7xl px-5 pb-16 md:px-8 md:pb-24">
-          <div className="grid gap-8 md:grid-cols-12">
-            {/* Vendor directory link — imagery-led */}
-            <div className="relative overflow-hidden rounded-3xl bg-foreground text-background shadow-lux md:col-span-5">
-              <div className="absolute inset-0 opacity-30 bg-gradient-to-br from-oxblood via-oxblood-deep to-foreground" />
-              <div className="relative flex h-full flex-col justify-between p-7 md:p-9">
-                <div>
-                  <div className="text-xs uppercase tracking-[0.28em] text-champagne">The Directory</div>
-                  <h3 className="mt-3 font-display text-3xl font-semibold leading-tight md:text-4xl">
-                    Every vendor we'd <span className="italic text-sparkle">vouch for.</span>
-                  </h3>
-                </div>
-                <div className="mt-8 flex flex-wrap gap-2 text-[11px] text-background/85">
-                  {["Bartenders", "Caterers", "Florists", "Photographers", "DJs", "Musicians", "Cakes", "Kids"].map((c) => (
-                    <span key={c} className="rounded-full border border-champagne/30 px-2.5 py-1">
-                      {c}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  to="/directory"
-                  className="mt-6 inline-block self-start rounded-full bg-champagne px-5 py-3 text-sm font-medium text-oxblood-deep hover:opacity-95"
-                >
-                  Browse the directory →
-                </Link>
-              </div>
-            </div>
-
-            {/* Inline budget calculator — mirrors /calculator visual */}
-            <div className="rounded-3xl bg-background p-7 ring-1 ring-border shadow-soft md:col-span-7 md:p-9">
-              <MiniCalculator />
-            </div>
+        <div className="mx-auto max-w-5xl px-5 pb-16 md:px-8 md:pb-24">
+          <div className="rounded-3xl bg-background p-7 ring-1 ring-border shadow-soft md:p-9">
+            <MiniCalculator />
           </div>
         </div>
       </section>

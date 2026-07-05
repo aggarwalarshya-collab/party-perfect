@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as VendorsRouteImport } from './routes/vendors'
 import { Route as SearchRouteImport } from './routes/search'
 import { Route as KitsRouteImport } from './routes/kits'
-import { Route as ExclusiveRouteImport } from './routes/exclusive'
 import { Route as DirectoryRouteImport } from './routes/directory'
 import { Route as CalculatorRouteImport } from './routes/calculator'
 import { Route as BoardRouteImport } from './routes/board'
@@ -36,11 +35,6 @@ const SearchRoute = SearchRouteImport.update({
 const KitsRoute = KitsRouteImport.update({
   id: '/kits',
   path: '/kits',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ExclusiveRoute = ExclusiveRouteImport.update({
-  id: '/exclusive',
-  path: '/exclusive',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DirectoryRoute = DirectoryRouteImport.update({
@@ -95,7 +89,6 @@ export interface FileRoutesByFullPath {
   '/board': typeof BoardRoute
   '/calculator': typeof CalculatorRoute
   '/directory': typeof DirectoryRoute
-  '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
   '/vendors': typeof VendorsRouteWithChildren
@@ -110,7 +103,6 @@ export interface FileRoutesByTo {
   '/board': typeof BoardRoute
   '/calculator': typeof CalculatorRoute
   '/directory': typeof DirectoryRoute
-  '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
   '/vendors': typeof VendorsRouteWithChildren
@@ -126,7 +118,6 @@ export interface FileRoutesById {
   '/board': typeof BoardRoute
   '/calculator': typeof CalculatorRoute
   '/directory': typeof DirectoryRoute
-  '/exclusive': typeof ExclusiveRoute
   '/kits': typeof KitsRoute
   '/search': typeof SearchRoute
   '/vendors': typeof VendorsRouteWithChildren
@@ -143,7 +134,6 @@ export interface FileRouteTypes {
     | '/board'
     | '/calculator'
     | '/directory'
-    | '/exclusive'
     | '/kits'
     | '/search'
     | '/vendors'
@@ -158,7 +148,6 @@ export interface FileRouteTypes {
     | '/board'
     | '/calculator'
     | '/directory'
-    | '/exclusive'
     | '/kits'
     | '/search'
     | '/vendors'
@@ -173,7 +162,6 @@ export interface FileRouteTypes {
     | '/board'
     | '/calculator'
     | '/directory'
-    | '/exclusive'
     | '/kits'
     | '/search'
     | '/vendors'
@@ -189,7 +177,6 @@ export interface RootRouteChildren {
   BoardRoute: typeof BoardRoute
   CalculatorRoute: typeof CalculatorRoute
   DirectoryRoute: typeof DirectoryRoute
-  ExclusiveRoute: typeof ExclusiveRoute
   KitsRoute: typeof KitsRoute
   SearchRoute: typeof SearchRoute
   VendorsRoute: typeof VendorsRouteWithChildren
@@ -218,13 +205,6 @@ declare module '@tanstack/react-router' {
       path: '/kits'
       fullPath: '/kits'
       preLoaderRoute: typeof KitsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/exclusive': {
-      id: '/exclusive'
-      path: '/exclusive'
-      fullPath: '/exclusive'
-      preLoaderRoute: typeof ExclusiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/directory': {
@@ -312,7 +292,6 @@ const rootRouteChildren: RootRouteChildren = {
   BoardRoute: BoardRoute,
   CalculatorRoute: CalculatorRoute,
   DirectoryRoute: DirectoryRoute,
-  ExclusiveRoute: ExclusiveRoute,
   KitsRoute: KitsRoute,
   SearchRoute: SearchRoute,
   VendorsRoute: VendorsRouteWithChildren,
@@ -322,12 +301,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
