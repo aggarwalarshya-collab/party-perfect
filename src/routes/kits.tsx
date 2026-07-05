@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { kits } from "@/data/parties";
 
 export const Route = createFileRoute("/kits")({
